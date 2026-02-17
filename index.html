@@ -1,0 +1,1099 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Wanderlust — Travel · Food · Vibes</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #FAFAF8;
+    --card: #FFFFFF;
+    --text: #1A1A1A;
+    --text-secondary: #6B6B6B;
+    --accent: #C4956A;
+    --accent-light: #F5EDE4;
+    --border: #EBEBEB;
+    --shadow: 0 2px 20px rgba(0,0,0,0.06);
+    --shadow-hover: 0 8px 32px rgba(0,0,0,0.1);
+    --radius: 16px;
+    --radius-sm: 10px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    max-width: 430px;
+    margin: 0 auto;
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── Header ── */
+  .header {
+    padding: 56px 24px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    background: var(--bg);
+    z-index: 100;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    background: rgba(250,250,248,0.85);
+  }
+
+  .logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 24px;
+    font-weight: 600;
+    letter-spacing: -0.5px;
+  }
+
+  .logo span { color: var(--accent); }
+
+  .header-icons { display: flex; gap: 16px; align-items: center; }
+
+  .header-icons button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--text);
+    font-size: 20px;
+    position: relative;
+  }
+
+  .notif-dot {
+    width: 7px; height: 7px;
+    background: #E8564A;
+    border-radius: 50%;
+    position: absolute;
+    top: -2px; right: -2px;
+    border: 2px solid var(--bg);
+  }
+
+  /* ── Stories ── */
+  .stories {
+    padding: 8px 24px 16px;
+    display: flex;
+    gap: 14px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .stories::-webkit-scrollbar { display: none; }
+
+  .story {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    flex-shrink: 0;
+    cursor: pointer;
+  }
+
+  .story-ring {
+    width: 64px; height: 64px;
+    border-radius: 50%;
+    padding: 3px;
+    background: linear-gradient(135deg, var(--accent), #E8A87C, #D4A574);
+  }
+
+  .story-ring.add {
+    background: var(--border);
+    position: relative;
+  }
+
+  .story-ring.add::after {
+    content: '+';
+    position: absolute;
+    bottom: -2px; right: -2px;
+    width: 22px; height: 22px;
+    background: var(--accent);
+    color: white;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px;
+    font-weight: 600;
+    border: 2px solid var(--bg);
+  }
+
+  .story-img {
+    width: 100%; height: 100%;
+    border-radius: 50%;
+    background: var(--card);
+    border: 3px solid var(--bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 26px;
+    overflow: hidden;
+  }
+
+  .story-name {
+    font-size: 11px;
+    color: var(--text-secondary);
+    max-width: 64px;
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  /* ── Section Titles ── */
+  .section-header {
+    padding: 20px 24px 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 600;
+  }
+
+  .section-link {
+    font-size: 13px;
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 500;
+    cursor: pointer;
+  }
+
+  /* ── Travel Cards ── */
+  .travel-scroll {
+    padding: 0 24px 8px;
+    display: flex;
+    gap: 14px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    scroll-snap-type: x mandatory;
+  }
+
+  .travel-scroll::-webkit-scrollbar { display: none; }
+
+  .travel-card {
+    flex-shrink: 0;
+    width: 260px;
+    height: 320px;
+    border-radius: var(--radius);
+    overflow: hidden;
+    position: relative;
+    scroll-snap-align: start;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+
+  .travel-card:hover { transform: scale(0.98); }
+
+  .travel-card-bg {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 80px;
+    background: linear-gradient(135deg, #E8D5C0, #C4956A);
+  }
+
+  .travel-card-overlay {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    padding: 24px 18px;
+    background: linear-gradient(transparent, rgba(0,0,0,0.65));
+    color: white;
+  }
+
+  .travel-card-location {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    opacity: 0.85;
+    margin-bottom: 4px;
+  }
+
+  .travel-card-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 1.2;
+  }
+
+  .travel-card-meta {
+    margin-top: 8px;
+    font-size: 12px;
+    opacity: 0.75;
+    display: flex;
+    gap: 12px;
+  }
+
+  /* ── Stats Bar ── */
+  .stats-bar {
+    margin: 16px 24px;
+    padding: 18px 20px;
+    background: var(--card);
+    border-radius: var(--radius);
+    display: flex;
+    justify-content: space-around;
+    box-shadow: var(--shadow);
+  }
+
+  .stat {
+    text-align: center;
+  }
+
+  .stat-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  .stat-label {
+    font-size: 11px;
+    color: var(--text-secondary);
+    margin-top: 2px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  /* ── Food Grid ── */
+  .food-grid {
+    padding: 0 24px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+
+  .food-card {
+    border-radius: var(--radius);
+    overflow: hidden;
+    background: var(--card);
+    box-shadow: var(--shadow);
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .food-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-hover);
+  }
+
+  .food-card:first-child {
+    grid-column: 1 / -1;
+  }
+
+  .food-img {
+    width: 100%;
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 56px;
+    background: linear-gradient(135deg, #FAE8D4, #F0D5B8);
+  }
+
+  .food-card:first-child .food-img {
+    aspect-ratio: 2/1;
+    font-size: 72px;
+  }
+
+  .food-info {
+    padding: 12px 14px;
+  }
+
+  .food-name {
+    font-weight: 600;
+    font-size: 14px;
+    margin-bottom: 2px;
+  }
+
+  .food-place {
+    font-size: 12px;
+    color: var(--text-secondary);
+  }
+
+  .food-rating {
+    margin-top: 6px;
+    font-size: 12px;
+    color: var(--accent);
+    font-weight: 500;
+  }
+
+  /* ── Retro Filter Section ── */
+  .filter-section {
+    margin: 20px 24px;
+    padding: 24px 20px;
+    background: var(--card);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+  }
+
+  .filter-preview {
+    width: 100%;
+    aspect-ratio: 4/3;
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    margin-bottom: 16px;
+    position: relative;
+    background: #ddd;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 100px;
+  }
+
+  .filter-preview img, .filter-preview .preview-content {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .filter-badge {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background: rgba(0,0,0,0.5);
+    color: white;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 500;
+    backdrop-filter: blur(10px);
+  }
+
+  .filter-options {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    padding-bottom: 4px;
+  }
+
+  .filter-options::-webkit-scrollbar { display: none; }
+
+  .filter-btn {
+    flex-shrink: 0;
+    padding: 8px 18px;
+    border-radius: 24px;
+    border: 1.5px solid var(--border);
+    background: transparent;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.25s ease;
+  }
+
+  .filter-btn.active, .filter-btn:hover {
+    background: var(--text);
+    color: white;
+    border-color: var(--text);
+  }
+
+  /* Filter effects */
+  .filter-vintage { filter: sepia(0.45) contrast(1.1) brightness(0.95) saturate(0.85); }
+  .filter-polaroid { filter: contrast(1.05) brightness(1.08) saturate(0.75) sepia(0.15); }
+  .filter-film { filter: contrast(1.15) brightness(0.92) saturate(1.2) hue-rotate(-5deg); }
+  .filter-faded { filter: contrast(0.85) brightness(1.1) saturate(0.6) sepia(0.1); }
+  .filter-noir { filter: grayscale(1) contrast(1.3) brightness(0.9); }
+  .filter-golden { filter: sepia(0.3) contrast(1.05) brightness(1.05) saturate(1.1) hue-rotate(-10deg); }
+
+  /* ── Recent Posts Feed ── */
+  .post-card {
+    margin: 14px 24px;
+    background: var(--card);
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+  }
+
+  .post-header {
+    padding: 14px 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .post-avatar {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent), #E8A87C);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+  }
+
+  .post-user-info {
+    flex: 1;
+  }
+
+  .post-username {
+    font-weight: 600;
+    font-size: 13px;
+  }
+
+  .post-location-tag {
+    font-size: 11px;
+    color: var(--text-secondary);
+  }
+
+  .post-time {
+    font-size: 11px;
+    color: var(--text-secondary);
+  }
+
+  .post-image {
+    width: 100%;
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 90px;
+    background: linear-gradient(135deg, #E8D5C0, #D4C0A8);
+  }
+
+  .post-actions {
+    padding: 12px 16px;
+    display: flex;
+    gap: 18px;
+  }
+
+  .post-action {
+    background: none;
+    border: none;
+    font-size: 22px;
+    cursor: pointer;
+    transition: transform 0.2s;
+  }
+
+  .post-action:hover { transform: scale(1.15); }
+
+  .post-action.liked { animation: heartPop 0.4s ease; }
+
+  @keyframes heartPop {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.35); }
+    100% { transform: scale(1); }
+  }
+
+  .post-likes {
+    padding: 0 16px;
+    font-size: 13px;
+    font-weight: 600;
+  }
+
+  .post-caption {
+    padding: 6px 16px 14px;
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--text-secondary);
+  }
+
+  .post-caption strong {
+    color: var(--text);
+    font-weight: 600;
+  }
+
+  /* ── Upload Photo Section ── */
+  .upload-section {
+    margin: 20px 24px;
+    padding: 32px 20px;
+    border: 2px dashed var(--border);
+    border-radius: var(--radius);
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .upload-section:hover {
+    border-color: var(--accent);
+    background: var(--accent-light);
+  }
+
+  .upload-icon {
+    font-size: 36px;
+    margin-bottom: 8px;
+  }
+
+  .upload-text {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+
+  .upload-subtext {
+    font-size: 12px;
+    color: var(--text-secondary);
+  }
+
+  /* ── Bottom Nav ── */
+  .bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 430px;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    padding: 10px 0 28px;
+    display: flex;
+    justify-content: space-around;
+    z-index: 100;
+    border-top: 1px solid var(--border);
+  }
+
+  .nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--text-secondary);
+    transition: color 0.2s;
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  .nav-item.active { color: var(--text); }
+
+  .nav-icon { font-size: 22px; }
+
+  .nav-label {
+    font-size: 10px;
+    font-weight: 500;
+  }
+
+  .nav-create {
+    width: 44px; height: 44px;
+    border-radius: 14px;
+    background: var(--text);
+    color: white;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: -12px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .nav-create:hover {
+    transform: scale(1.08);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+  }
+
+  /* ── Bucket List ── */
+  .bucket-list {
+    padding: 0 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .bucket-item {
+    padding: 14px 16px;
+    background: var(--card);
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    box-shadow: var(--shadow);
+    cursor: pointer;
+    transition: transform 0.2s;
+  }
+
+  .bucket-item:hover { transform: translateX(4px); }
+
+  .bucket-emoji { font-size: 28px; flex-shrink: 0; }
+
+  .bucket-info { flex: 1; }
+
+  .bucket-title {
+    font-weight: 600;
+    font-size: 14px;
+    margin-bottom: 2px;
+  }
+
+  .bucket-desc {
+    font-size: 12px;
+    color: var(--text-secondary);
+  }
+
+  .bucket-check {
+    width: 24px; height: 24px;
+    border-radius: 50%;
+    border: 2px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s;
+    flex-shrink: 0;
+  }
+
+  .bucket-check.done {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: white;
+    font-size: 12px;
+  }
+
+  /* ── Spacer for bottom nav ── */
+  .nav-spacer { height: 90px; }
+
+  /* ── Animations ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .animate-in {
+    animation: fadeUp 0.5s ease forwards;
+    opacity: 0;
+  }
+
+  .delay-1 { animation-delay: 0.1s; }
+  .delay-2 { animation-delay: 0.2s; }
+  .delay-3 { animation-delay: 0.3s; }
+  .delay-4 { animation-delay: 0.4s; }
+  .delay-5 { animation-delay: 0.5s; }
+
+  /* ── Modal ── */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.5);
+    z-index: 200;
+    align-items: flex-end;
+    justify-content: center;
+    backdrop-filter: blur(4px);
+  }
+
+  .modal-overlay.show { display: flex; }
+
+  .modal {
+    width: 100%;
+    max-width: 430px;
+    background: var(--card);
+    border-radius: 24px 24px 0 0;
+    padding: 24px;
+    max-height: 70vh;
+    animation: slideUp 0.35s ease;
+  }
+
+  @keyframes slideUp {
+    from { transform: translateY(100%); }
+    to { transform: translateY(0); }
+  }
+
+  .modal-handle {
+    width: 40px; height: 4px;
+    background: var(--border);
+    border-radius: 2px;
+    margin: 0 auto 20px;
+  }
+
+  .modal-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    margin-bottom: 16px;
+  }
+
+  /* ── Hidden file input ── */
+  #photoInput { display: none; }
+
+  /* ── Toast ── */
+  .toast {
+    position: fixed;
+    top: 60px;
+    left: 50%;
+    transform: translateX(-50%) translateY(-20px);
+    background: var(--text);
+    color: white;
+    padding: 12px 24px;
+    border-radius: 12px;
+    font-size: 13px;
+    font-weight: 500;
+    opacity: 0;
+    transition: all 0.35s ease;
+    z-index: 300;
+    pointer-events: none;
+  }
+
+  .toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+</style>
+</head>
+<body>
+
+<div class="toast" id="toast"></div>
+
+<!-- Header -->
+<header class="header">
+  <div class="logo">Wander<span>lust</span></div>
+  <div class="header-icons">
+    <button onclick="showToast('🔔 No new notifications')">🔔<span class="notif-dot"></span></button>
+    <button onclick="showToast('⚙️ Settings coming soon!')">⚙️</button>
+  </div>
+</header>
+
+<!-- Stories -->
+<div class="stories animate-in">
+  <div class="story" onclick="document.getElementById('photoInput').click()">
+    <div class="story-ring add"><div class="story-img">📷</div></div>
+    <span class="story-name">Add Story</span>
+  </div>
+  <div class="story"><div class="story-ring"><div class="story-img">🇯🇵</div></div><span class="story-name">Tokyo</span></div>
+  <div class="story"><div class="story-ring"><div class="story-img">🇮🇹</div></div><span class="story-name">Rome</span></div>
+  <div class="story"><div class="story-ring"><div class="story-img">🇹🇭</div></div><span class="story-name">Bangkok</span></div>
+  <div class="story"><div class="story-ring"><div class="story-img">🇫🇷</div></div><span class="story-name">Paris</span></div>
+  <div class="story"><div class="story-ring"><div class="story-img">🇲🇽</div></div><span class="story-name">Mexico</span></div>
+</div>
+
+<!-- Stats Bar -->
+<div class="stats-bar animate-in delay-1">
+  <div class="stat">
+    <div class="stat-number">12</div>
+    <div class="stat-label">Countries</div>
+  </div>
+  <div class="stat">
+    <div class="stat-number">47</div>
+    <div class="stat-label">Cities</div>
+  </div>
+  <div class="stat">
+    <div class="stat-number">286</div>
+    <div class="stat-label">Posts</div>
+  </div>
+  <div class="stat">
+    <div class="stat-number">14.2K</div>
+    <div class="stat-label">Followers</div>
+  </div>
+</div>
+
+<!-- Travel Section -->
+<div class="section-header animate-in delay-2">
+  <h2 class="section-title">Recent Trips</h2>
+  <a class="section-link">View All →</a>
+</div>
+
+<div class="travel-scroll animate-in delay-2">
+  <div class="travel-card">
+    <div class="travel-card-bg" style="background: linear-gradient(135deg, #FFB7A5, #FF7B54);">🌸</div>
+    <div class="travel-card-overlay">
+      <div class="travel-card-location">Japan · Asia</div>
+      <div class="travel-card-title">Cherry Blossom Season in Kyoto</div>
+      <div class="travel-card-meta"><span>📸 42 photos</span><span>7 days</span></div>
+    </div>
+  </div>
+  <div class="travel-card">
+    <div class="travel-card-bg" style="background: linear-gradient(135deg, #74B9FF, #0984E3);">🏖️</div>
+    <div class="travel-card-overlay">
+      <div class="travel-card-location">Bali · Indonesia</div>
+      <div class="travel-card-title">Island Hopping & Hidden Beaches</div>
+      <div class="travel-card-meta"><span>📸 38 photos</span><span>5 days</span></div>
+    </div>
+  </div>
+  <div class="travel-card">
+    <div class="travel-card-bg" style="background: linear-gradient(135deg, #FFA085, #FF5959);">🏛️</div>
+    <div class="travel-card-overlay">
+      <div class="travel-card-location">Rome · Italy</div>
+      <div class="travel-card-title">Pasta, Gelato & Ancient Ruins</div>
+      <div class="travel-card-meta"><span>📸 56 photos</span><span>10 days</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- Food Section -->
+<div class="section-header animate-in delay-3">
+  <h2 class="section-title">Foodie Finds</h2>
+  <a class="section-link">View All →</a>
+</div>
+
+<div class="food-grid animate-in delay-3">
+  <div class="food-card">
+    <div class="food-img" style="background: linear-gradient(135deg, #FFECD2, #FCB69F);">🍜</div>
+    <div class="food-info">
+      <div class="food-name">Tonkotsu Ramen</div>
+      <div class="food-place">📍 Ichiran, Shibuya</div>
+      <div class="food-rating">★★★★★ Heavenly broth</div>
+    </div>
+  </div>
+  <div class="food-card">
+    <div class="food-img" style="background: linear-gradient(135deg, #E8D5B7, #D4A574);">🥐</div>
+    <div class="food-info">
+      <div class="food-name">Croissant</div>
+      <div class="food-place">📍 Du Pain, Paris</div>
+      <div class="food-rating">★★★★★</div>
+    </div>
+  </div>
+  <div class="food-card">
+    <div class="food-img" style="background: linear-gradient(135deg, #C4E0C5, #88C98A);">🌮</div>
+    <div class="food-info">
+      <div class="food-name">Street Tacos</div>
+      <div class="food-place">📍 CDMX</div>
+      <div class="food-rating">★★★★☆</div>
+    </div>
+  </div>
+</div>
+
+<!-- Retro Filter Section -->
+<div class="section-header animate-in delay-4">
+  <h2 class="section-title">Retro Filters</h2>
+  <a class="section-link" onclick="document.getElementById('photoInput').click()">Upload Photo →</a>
+</div>
+
+<div class="filter-section animate-in delay-4">
+  <div class="filter-preview" id="filterPreview">
+    <div class="preview-content" id="previewContent" style="display:flex;align-items:center;justify-content:center;font-size:100px;width:100%;height:100%;background:linear-gradient(135deg,#E8D5C0,#C4956A);">🌅</div>
+    <div class="filter-badge" id="filterBadge">Original</div>
+  </div>
+  <div class="filter-options" id="filterOptions">
+    <button class="filter-btn active" onclick="applyFilter('none', 'Original', this)">Original</button>
+    <button class="filter-btn" onclick="applyFilter('filter-vintage', 'Vintage', this)">Vintage</button>
+    <button class="filter-btn" onclick="applyFilter('filter-polaroid', 'Polaroid', this)">Polaroid</button>
+    <button class="filter-btn" onclick="applyFilter('filter-film', '35mm Film', this)">35mm Film</button>
+    <button class="filter-btn" onclick="applyFilter('filter-faded', 'Faded', this)">Faded</button>
+    <button class="filter-btn" onclick="applyFilter('filter-noir', 'Noir', this)">Noir</button>
+    <button class="filter-btn" onclick="applyFilter('filter-golden', 'Golden Hour', this)">Golden Hour</button>
+  </div>
+</div>
+
+<!-- Upload Section -->
+<div class="upload-section animate-in delay-4" onclick="document.getElementById('photoInput').click()">
+  <div class="upload-icon">📸</div>
+  <div class="upload-text">Upload a photo to try filters</div>
+  <div class="upload-subtext">Tap to choose from your gallery</div>
+</div>
+<input type="file" id="photoInput" accept="image/*" onchange="handlePhotoUpload(event)">
+
+<!-- Bucket List -->
+<div class="section-header animate-in delay-5">
+  <h2 class="section-title">Travel Bucket List</h2>
+  <a class="section-link">Edit →</a>
+</div>
+
+<div class="bucket-list animate-in delay-5">
+  <div class="bucket-item" onclick="toggleBucket(this)">
+    <div class="bucket-emoji">🌊</div>
+    <div class="bucket-info">
+      <div class="bucket-title">Maldives Overwater Villa</div>
+      <div class="bucket-desc">Crystal clear waters & sunset views</div>
+    </div>
+    <div class="bucket-check">✓</div>
+  </div>
+  <div class="bucket-item" onclick="toggleBucket(this)">
+    <div class="bucket-emoji">🗼</div>
+    <div class="bucket-info">
+      <div class="bucket-title">Eat at a Michelin Star in Tokyo</div>
+      <div class="bucket-desc">Sukiyabashi Jiro is the dream</div>
+    </div>
+    <div class="bucket-check done">✓</div>
+  </div>
+  <div class="bucket-item" onclick="toggleBucket(this)">
+    <div class="bucket-emoji">🏔️</div>
+    <div class="bucket-info">
+      <div class="bucket-title">Northern Lights in Iceland</div>
+      <div class="bucket-desc">The ultimate aurora experience</div>
+    </div>
+    <div class="bucket-check">✓</div>
+  </div>
+  <div class="bucket-item" onclick="toggleBucket(this)">
+    <div class="bucket-emoji">🍕</div>
+    <div class="bucket-info">
+      <div class="bucket-title">Pizza tour through Naples</div>
+      <div class="bucket-desc">Where pizza was born</div>
+    </div>
+    <div class="bucket-check">✓</div>
+  </div>
+</div>
+
+<!-- Recent Posts -->
+<div class="section-header">
+  <h2 class="section-title">Recent Posts</h2>
+  <a class="section-link">Feed →</a>
+</div>
+
+<div class="post-card">
+  <div class="post-header">
+    <div class="post-avatar">✨</div>
+    <div class="post-user-info">
+      <div class="post-username">wanderlust.girl</div>
+      <div class="post-location-tag">📍 Ubud, Bali</div>
+    </div>
+    <div class="post-time">2h ago</div>
+  </div>
+  <div class="post-image" style="background:linear-gradient(135deg,#A8E6CF,#55B89F);">🌴</div>
+  <div class="post-actions">
+    <button class="post-action" onclick="toggleLike(this)">🤍</button>
+    <button class="post-action">💬</button>
+    <button class="post-action">📤</button>
+    <button class="post-action" style="margin-left:auto;">🔖</button>
+  </div>
+  <div class="post-likes">1,247 likes</div>
+  <div class="post-caption"><strong>wanderlust.girl</strong> Found the most magical rice terraces today ✨ Nature's own artwork 🌾 #bali #ubud #travelgram</div>
+</div>
+
+<div class="post-card">
+  <div class="post-header">
+    <div class="post-avatar">✨</div>
+    <div class="post-user-info">
+      <div class="post-username">wanderlust.girl</div>
+      <div class="post-location-tag">📍 Amalfi Coast, Italy</div>
+    </div>
+    <div class="post-time">3d ago</div>
+  </div>
+  <div class="post-image filter-vintage" style="background:linear-gradient(135deg,#FFD89B,#19547B);">🍋</div>
+  <div class="post-actions">
+    <button class="post-action" onclick="toggleLike(this)">🤍</button>
+    <button class="post-action">💬</button>
+    <button class="post-action">📤</button>
+    <button class="post-action" style="margin-left:auto;">🔖</button>
+  </div>
+  <div class="post-likes">2,891 likes</div>
+  <div class="post-caption"><strong>wanderlust.girl</strong> Limoncello sunsets & pasta nights 🍝✨ This vintage filter hits different on the coast #amalficoast #italy #retrovibes</div>
+</div>
+
+<div class="nav-spacer"></div>
+
+<!-- Bottom Nav -->
+<nav class="bottom-nav">
+  <button class="nav-item active">
+    <span class="nav-icon">🏠</span>
+    <span class="nav-label">Home</span>
+  </button>
+  <button class="nav-item" onclick="showToast('🔍 Explore coming soon!')">
+    <span class="nav-icon">🔍</span>
+    <span class="nav-label">Explore</span>
+  </button>
+  <button class="nav-create" onclick="document.getElementById('photoInput').click()">+</button>
+  <button class="nav-item" onclick="showToast('🗺️ Map view coming soon!')">
+    <span class="nav-icon">🗺️</span>
+    <span class="nav-label">Map</span>
+  </button>
+  <button class="nav-item" onclick="showToast('👤 Profile coming soon!')">
+    <span class="nav-icon">👤</span>
+    <span class="nav-label">Profile</span>
+  </button>
+</nav>
+
+<script>
+  // ── Filter Logic ──
+  let currentFilter = 'none';
+
+  function applyFilter(filterClass, filterName, btn) {
+    const preview = document.getElementById('previewContent');
+    const badge = document.getElementById('filterBadge');
+
+    // Remove all filter classes
+    preview.className = 'preview-content';
+    if (filterClass !== 'none') {
+      preview.classList.add(filterClass);
+    }
+
+    badge.textContent = filterName;
+    currentFilter = filterClass;
+
+    // Update active button
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  }
+
+  // ── Photo Upload ──
+  function handlePhotoUpload(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      const preview = document.getElementById('previewContent');
+      preview.innerHTML = '';
+      preview.style.fontSize = '0';
+      preview.style.background = 'none';
+
+      const img = document.createElement('img');
+      img.src = e.target.result;
+      img.style.width = '100%';
+      img.style.height = '100%';
+      img.style.objectFit = 'cover';
+      preview.appendChild(img);
+
+      if (currentFilter !== 'none') {
+        preview.className = 'preview-content ' + currentFilter;
+      }
+
+      showToast('📸 Photo uploaded! Try the filters ✨');
+
+      // Scroll to filter section
+      document.getElementById('filterPreview').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    };
+    reader.readAsDataURL(file);
+
+    // Reset input so same file can be re-uploaded
+    event.target.value = '';
+  }
+
+  // ── Like Toggle ──
+  function toggleLike(btn) {
+    if (btn.textContent === '🤍') {
+      btn.textContent = '❤️';
+      btn.classList.add('liked');
+      setTimeout(() => btn.classList.remove('liked'), 400);
+    } else {
+      btn.textContent = '🤍';
+    }
+  }
+
+  // ── Bucket List Toggle ──
+  function toggleBucket(item) {
+    const check = item.querySelector('.bucket-check');
+    check.classList.toggle('done');
+    if (check.classList.contains('done')) {
+      showToast('✅ Done! One more dream checked off!');
+    }
+  }
+
+  // ── Toast Notification ──
+  function showToast(msg) {
+    const toast = document.getElementById('toast');
+    toast.textContent = msg;
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 2500);
+  }
+
+  // ── Intersection Observer for Scroll Animations ──
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.post-card, .bucket-item').forEach(el => {
+    observer.observe(el);
+  });
+</script>
+
+</body>
+</html>
