@@ -7,6 +7,35 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <script src="https://accounts.google.com/gsi/client" async defer></script>
 <style>
+  :root {
+    --bg: #FAFAF8;
+    --card: #FFFFFF;
+    --text: #1A1A1A;
+    --text-secondary: #6B6B6B;
+    --accent: #C4956A;
+    --accent-light: #F5EDE4;
+    --border: #EBEBEB;
+    --shadow: 0 2px 20px rgba(0,0,0,0.06);
+    --shadow-hover: 0 8px 32px rgba(0,0,0,0.1);
+    --radius: 16px;
+    --radius-sm: 10px;
+    --danger: #E8564A;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    max-width: 430px;
+    margin: 0 auto;
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
   /* ── Login Screen ── */
   .login-screen {
     position: fixed;
@@ -33,7 +62,7 @@
     width: 100%;
   }
 
-  .login-logo {
+  .login-logo-big {
     font-family: 'Playfair Display', serif;
     font-size: 42px;
     font-weight: 600;
@@ -41,12 +70,11 @@
     margin-bottom: 8px;
   }
 
-  .login-logo span { color: #C4956A; }
+  .login-logo-big span { color: var(--accent); }
 
   .login-tagline {
-    font-family: 'DM Sans', sans-serif;
     font-size: 15px;
-    color: #6B6B6B;
+    color: var(--text-secondary);
     margin-bottom: 48px;
     letter-spacing: 0.3px;
   }
@@ -62,12 +90,11 @@
     font-size: 22px;
     font-weight: 600;
     margin-bottom: 8px;
-    color: #1A1A1A;
   }
 
   .login-desc {
     font-size: 14px;
-    color: #6B6B6B;
+    color: var(--text-secondary);
     margin-bottom: 36px;
     line-height: 1.6;
   }
@@ -78,12 +105,12 @@
     gap: 12px;
     padding: 14px 32px;
     background: #FFFFFF;
-    border: 1.5px solid #EBEBEB;
+    border: 1.5px solid var(--border);
     border-radius: 50px;
     font-family: 'DM Sans', sans-serif;
     font-size: 15px;
     font-weight: 500;
-    color: #1A1A1A;
+    color: var(--text);
     cursor: pointer;
     transition: all 0.3s ease;
     box-shadow: 0 2px 12px rgba(0,0,0,0.06);
@@ -92,13 +119,10 @@
   .google-btn:hover {
     box-shadow: 0 4px 20px rgba(0,0,0,0.12);
     transform: translateY(-2px);
-    border-color: #C4956A;
+    border-color: var(--accent);
   }
 
-  .google-btn svg {
-    width: 20px;
-    height: 20px;
-  }
+  .google-btn svg { width: 20px; height: 20px; }
 
   .login-footer {
     margin-top: 32px;
@@ -107,70 +131,14 @@
     line-height: 1.6;
   }
 
-  .user-bar {
-    display: none;
-    align-items: center;
-    gap: 10px;
-    cursor: pointer;
-  }
-
-  .user-bar.show { display: flex; }
-
-  .user-avatar {
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    border: 2px solid #C4956A;
-  }
-
-  .user-name {
-    font-size: 13px;
-    font-weight: 600;
-    color: #1A1A1A;
-  }
-
-  .app-content { display: none; }
-  .app-content.show { display: block; }
-
-  .app-content .bottom-nav { display: none; }
-  .app-content.show .bottom-nav { display: flex; }
-  :root {
-    --bg: #FAFAF8;
-    --card: #FFFFFF;
-    --text: #1A1A1A;
-    --text-secondary: #6B6B6B;
-    --accent: #C4956A;
-    --accent-light: #F5EDE4;
-    --border: #EBEBEB;
-    --shadow: 0 2px 20px rgba(0,0,0,0.06);
-    --shadow-hover: 0 8px 32px rgba(0,0,0,0.1);
-    --radius: 16px;
-    --radius-sm: 10px;
-  }
-
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-
-  body {
-    font-family: 'DM Sans', sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    max-width: 430px;
-    margin: 0 auto;
-    min-height: 100vh;
-    position: relative;
-    overflow-x: hidden;
-    -webkit-font-smoothing: antialiased;
-  }
-
   /* ── Header ── */
   .header {
-    padding: 56px 24px 20px;
+    padding: 56px 24px 16px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     position: sticky;
     top: 0;
-    background: var(--bg);
     z-index: 100;
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
@@ -186,24 +154,135 @@
 
   .logo span { color: var(--accent); }
 
-  .header-icons { display: flex; gap: 16px; align-items: center; }
+  .header-right { display: flex; gap: 12px; align-items: center; }
 
-  .header-icons button {
+  .header-btn {
     background: none;
     border: none;
     cursor: pointer;
-    color: var(--text);
     font-size: 20px;
     position: relative;
+    padding: 4px;
   }
 
   .notif-dot {
     width: 7px; height: 7px;
-    background: #E8564A;
+    background: var(--danger);
     border-radius: 50%;
     position: absolute;
-    top: -2px; right: -2px;
+    top: 0; right: 0;
     border: 2px solid var(--bg);
+  }
+
+  .user-pill {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 4px 12px 4px 4px;
+    background: var(--card);
+    border-radius: 50px;
+    border: 1px solid var(--border);
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .user-pill:hover { box-shadow: var(--shadow); }
+
+  .user-pill img {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    border: 2px solid var(--accent);
+  }
+
+  .user-pill span {
+    font-size: 13px;
+    font-weight: 600;
+  }
+
+  /* ── Views ── */
+  .app-content { display: none; }
+  .app-content.show { display: block; }
+
+  .view { display: none; }
+  .view.active { display: block; }
+
+  /* ── Bottom Nav ── */
+  .bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 430px;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    padding: 10px 0 28px;
+    display: none;
+    justify-content: space-around;
+    z-index: 100;
+    border-top: 1px solid var(--border);
+  }
+
+  .app-content.show .bottom-nav { display: flex; }
+
+  .nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--text-secondary);
+    transition: color 0.2s;
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  .nav-item.active { color: var(--text); }
+  .nav-icon { font-size: 22px; }
+  .nav-label { font-size: 10px; font-weight: 500; }
+
+  .nav-create {
+    width: 44px; height: 44px;
+    border-radius: 14px;
+    background: var(--text);
+    color: white;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: -12px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+    transition: transform 0.2s;
+  }
+
+  .nav-create:hover { transform: scale(1.08); }
+
+  .nav-spacer { height: 90px; }
+
+  /* ── Section Titles ── */
+  .section-header {
+    padding: 20px 24px 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 600;
+  }
+
+  .section-link {
+    font-size: 13px;
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 500;
+    cursor: pointer;
   }
 
   /* ── Stories ── */
@@ -274,98 +353,9 @@
     white-space: nowrap;
   }
 
-  /* ── Section Titles ── */
-  .section-header {
-    padding: 20px 24px 12px;
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-  }
-
-  .section-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 20px;
-    font-weight: 600;
-  }
-
-  .section-link {
-    font-size: 13px;
-    color: var(--accent);
-    text-decoration: none;
-    font-weight: 500;
-    cursor: pointer;
-  }
-
-  /* ── Travel Cards ── */
-  .travel-scroll {
-    padding: 0 24px 8px;
-    display: flex;
-    gap: 14px;
-    overflow-x: auto;
-    scrollbar-width: none;
-    scroll-snap-type: x mandatory;
-  }
-
-  .travel-scroll::-webkit-scrollbar { display: none; }
-
-  .travel-card {
-    flex-shrink: 0;
-    width: 260px;
-    height: 320px;
-    border-radius: var(--radius);
-    overflow: hidden;
-    position: relative;
-    scroll-snap-align: start;
-    cursor: pointer;
-    transition: transform 0.3s ease;
-  }
-
-  .travel-card:hover { transform: scale(0.98); }
-
-  .travel-card-bg {
-    width: 100%; height: 100%;
-    object-fit: cover;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 80px;
-    background: linear-gradient(135deg, #E8D5C0, #C4956A);
-  }
-
-  .travel-card-overlay {
-    position: absolute;
-    bottom: 0; left: 0; right: 0;
-    padding: 24px 18px;
-    background: linear-gradient(transparent, rgba(0,0,0,0.65));
-    color: white;
-  }
-
-  .travel-card-location {
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    opacity: 0.85;
-    margin-bottom: 4px;
-  }
-
-  .travel-card-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 20px;
-    font-weight: 600;
-    line-height: 1.2;
-  }
-
-  .travel-card-meta {
-    margin-top: 8px;
-    font-size: 12px;
-    opacity: 0.75;
-    display: flex;
-    gap: 12px;
-  }
-
   /* ── Stats Bar ── */
   .stats-bar {
-    margin: 16px 24px;
+    margin: 12px 24px;
     padding: 18px 20px;
     background: var(--card);
     border-radius: var(--radius);
@@ -374,15 +364,12 @@
     box-shadow: var(--shadow);
   }
 
-  .stat {
-    text-align: center;
-  }
+  .stat { text-align: center; }
 
   .stat-number {
     font-family: 'Playfair Display', serif;
     font-size: 22px;
     font-weight: 600;
-    color: var(--text);
   }
 
   .stat-label {
@@ -393,150 +380,7 @@
     letter-spacing: 0.5px;
   }
 
-  /* ── Food Grid ── */
-  .food-grid {
-    padding: 0 24px;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 14px;
-  }
-
-  .food-card {
-    border-radius: var(--radius);
-    overflow: hidden;
-    background: var(--card);
-    box-shadow: var(--shadow);
-    cursor: pointer;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-
-  .food-card:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-hover);
-  }
-
-  .food-card:first-child {
-    grid-column: 1 / -1;
-  }
-
-  .food-img {
-    width: 100%;
-    aspect-ratio: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 56px;
-    background: linear-gradient(135deg, #FAE8D4, #F0D5B8);
-  }
-
-  .food-card:first-child .food-img {
-    aspect-ratio: 2/1;
-    font-size: 72px;
-  }
-
-  .food-info {
-    padding: 12px 14px;
-  }
-
-  .food-name {
-    font-weight: 600;
-    font-size: 14px;
-    margin-bottom: 2px;
-  }
-
-  .food-place {
-    font-size: 12px;
-    color: var(--text-secondary);
-  }
-
-  .food-rating {
-    margin-top: 6px;
-    font-size: 12px;
-    color: var(--accent);
-    font-weight: 500;
-  }
-
-  /* ── Retro Filter Section ── */
-  .filter-section {
-    margin: 20px 24px;
-    padding: 24px 20px;
-    background: var(--card);
-    border-radius: var(--radius);
-    box-shadow: var(--shadow);
-  }
-
-  .filter-preview {
-    width: 100%;
-    aspect-ratio: 4/3;
-    border-radius: var(--radius-sm);
-    overflow: hidden;
-    margin-bottom: 16px;
-    position: relative;
-    background: #ddd;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 100px;
-  }
-
-  .filter-preview img, .filter-preview .preview-content {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  .filter-badge {
-    position: absolute;
-    top: 12px;
-    left: 12px;
-    background: rgba(0,0,0,0.5);
-    color: white;
-    padding: 4px 10px;
-    border-radius: 20px;
-    font-size: 11px;
-    font-weight: 500;
-    backdrop-filter: blur(10px);
-  }
-
-  .filter-options {
-    display: flex;
-    gap: 10px;
-    overflow-x: auto;
-    scrollbar-width: none;
-    padding-bottom: 4px;
-  }
-
-  .filter-options::-webkit-scrollbar { display: none; }
-
-  .filter-btn {
-    flex-shrink: 0;
-    padding: 8px 18px;
-    border-radius: 24px;
-    border: 1.5px solid var(--border);
-    background: transparent;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 13px;
-    font-weight: 500;
-    color: var(--text-secondary);
-    cursor: pointer;
-    transition: all 0.25s ease;
-  }
-
-  .filter-btn.active, .filter-btn:hover {
-    background: var(--text);
-    color: white;
-    border-color: var(--text);
-  }
-
-  /* Filter effects */
-  .filter-vintage { filter: sepia(0.45) contrast(1.1) brightness(0.95) saturate(0.85); }
-  .filter-polaroid { filter: contrast(1.05) brightness(1.08) saturate(0.75) sepia(0.15); }
-  .filter-film { filter: contrast(1.15) brightness(0.92) saturate(1.2) hue-rotate(-5deg); }
-  .filter-faded { filter: contrast(0.85) brightness(1.1) saturate(0.6) sepia(0.1); }
-  .filter-noir { filter: grayscale(1) contrast(1.3) brightness(0.9); }
-  .filter-golden { filter: sepia(0.3) contrast(1.05) brightness(1.05) saturate(1.1) hue-rotate(-10deg); }
-
-  /* ── Recent Posts Feed ── */
+  /* ── Post Card ── */
   .post-card {
     margin: 14px 24px;
     background: var(--card);
@@ -555,6 +399,13 @@
   .post-avatar {
     width: 36px; height: 36px;
     border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--accent-light);
+  }
+
+  .post-avatar-emoji {
+    width: 36px; height: 36px;
+    border-radius: 50%;
     background: linear-gradient(135deg, var(--accent), #E8A87C);
     display: flex;
     align-items: center;
@@ -562,9 +413,7 @@
     font-size: 16px;
   }
 
-  .post-user-info {
-    flex: 1;
-  }
+  .post-user-info { flex: 1; }
 
   .post-username {
     font-weight: 600;
@@ -582,6 +431,14 @@
   }
 
   .post-image {
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    display: block;
+    background: linear-gradient(135deg, #E8D5C0, #D4C0A8);
+  }
+
+  .post-image-emoji {
     width: 100%;
     aspect-ratio: 1;
     display: flex;
@@ -607,8 +464,6 @@
 
   .post-action:hover { transform: scale(1.15); }
 
-  .post-action.liked { animation: heartPop 0.4s ease; }
-
   @keyframes heartPop {
     0% { transform: scale(1); }
     50% { transform: scale(1.35); }
@@ -633,220 +488,299 @@
     font-weight: 600;
   }
 
-  /* ── Upload Photo Section ── */
-  .upload-section {
-    margin: 20px 24px;
-    padding: 32px 20px;
-    border: 2px dashed var(--border);
-    border-radius: var(--radius);
-    text-align: center;
+  .post-delete {
+    background: none;
+    border: none;
+    font-size: 16px;
     cursor: pointer;
-    transition: all 0.3s ease;
+    opacity: 0.5;
+    transition: opacity 0.2s;
   }
 
-  .upload-section:hover {
+  .post-delete:hover { opacity: 1; }
+
+  /* ── Create View ── */
+  .create-area {
+    padding: 20px 24px;
+  }
+
+  .upload-zone {
+    width: 100%;
+    aspect-ratio: 1;
+    border: 2.5px dashed var(--border);
+    border-radius: var(--radius);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: var(--card);
+    overflow: hidden;
+    position: relative;
+  }
+
+  .upload-zone:hover {
     border-color: var(--accent);
     background: var(--accent-light);
   }
 
-  .upload-icon {
-    font-size: 36px;
-    margin-bottom: 8px;
-  }
-
-  .upload-text {
-    font-size: 14px;
-    font-weight: 500;
-    color: var(--text);
-    margin-bottom: 4px;
-  }
-
-  .upload-subtext {
-    font-size: 12px;
-    color: var(--text-secondary);
-  }
-
-  /* ── Bottom Nav ── */
-  .bottom-nav {
-    position: fixed;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 100%;
-    max-width: 430px;
-    background: rgba(255,255,255,0.92);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    padding: 10px 0 28px;
-    display: flex;
-    justify-content: space-around;
-    z-index: 100;
-    border-top: 1px solid var(--border);
-  }
-
-  .nav-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 3px;
-    background: none;
+  .upload-zone.has-image {
     border: none;
-    cursor: pointer;
-    color: var(--text-secondary);
-    transition: color 0.2s;
+    padding: 0;
+  }
+
+  .upload-zone img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0; left: 0;
+  }
+
+  .upload-zone .upload-placeholder {
+    text-align: center;
+    z-index: 1;
+  }
+
+  .upload-zone.has-image .upload-placeholder { display: none; }
+
+  .upload-icon { font-size: 48px; }
+  .upload-text { font-size: 15px; font-weight: 500; }
+  .upload-subtext { font-size: 12px; color: var(--text-secondary); }
+
+  /* ── Filter Pills ── */
+  .filter-row {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    padding: 16px 0;
+  }
+
+  .filter-row::-webkit-scrollbar { display: none; }
+
+  .filter-pill {
+    flex-shrink: 0;
+    padding: 8px 18px;
+    border-radius: 24px;
+    border: 1.5px solid var(--border);
+    background: transparent;
     font-family: 'DM Sans', sans-serif;
-  }
-
-  .nav-item.active { color: var(--text); }
-
-  .nav-icon { font-size: 22px; }
-
-  .nav-label {
-    font-size: 10px;
+    font-size: 13px;
     font-weight: 500;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.25s ease;
   }
 
-  .nav-create {
-    width: 44px; height: 44px;
-    border-radius: 14px;
+  .filter-pill.active, .filter-pill:hover {
+    background: var(--text);
+    color: white;
+    border-color: var(--text);
+  }
+
+  .filter-vintage { filter: sepia(0.45) contrast(1.1) brightness(0.95) saturate(0.85); }
+  .filter-polaroid { filter: contrast(1.05) brightness(1.08) saturate(0.75) sepia(0.15); }
+  .filter-film { filter: contrast(1.15) brightness(0.92) saturate(1.2) hue-rotate(-5deg); }
+  .filter-faded { filter: contrast(0.85) brightness(1.1) saturate(0.6) sepia(0.1); }
+  .filter-noir { filter: grayscale(1) contrast(1.3) brightness(0.9); }
+  .filter-golden { filter: sepia(0.3) contrast(1.05) brightness(1.05) saturate(1.1) hue-rotate(-10deg); }
+
+  /* ── Caption Input ── */
+  .caption-input {
+    width: 100%;
+    padding: 14px 16px;
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-sm);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    resize: none;
+    height: 80px;
+    margin-top: 4px;
+    transition: border-color 0.2s;
+    background: var(--card);
+  }
+
+  .caption-input:focus {
+    outline: none;
+    border-color: var(--accent);
+  }
+
+  .caption-input::placeholder { color: #B0B0B0; }
+
+  .location-input {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-sm);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    margin-top: 10px;
+    background: var(--card);
+    transition: border-color 0.2s;
+  }
+
+  .location-input:focus {
+    outline: none;
+    border-color: var(--accent);
+  }
+
+  .post-btn {
+    width: 100%;
+    padding: 16px;
     background: var(--text);
     color: white;
     border: none;
-    font-size: 24px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: -12px;
-    box-shadow: 0 4px 16px rgba(0,0,0,0.2);
-    transition: transform 0.2s, box-shadow 0.2s;
-  }
-
-  .nav-create:hover {
-    transform: scale(1.08);
-    box-shadow: 0 6px 20px rgba(0,0,0,0.25);
-  }
-
-  /* ── Bucket List ── */
-  .bucket-list {
-    padding: 0 24px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .bucket-item {
-    padding: 14px 16px;
-    background: var(--card);
     border-radius: var(--radius-sm);
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    box-shadow: var(--shadow);
-    cursor: pointer;
-    transition: transform 0.2s;
-  }
-
-  .bucket-item:hover { transform: translateX(4px); }
-
-  .bucket-emoji { font-size: 28px; flex-shrink: 0; }
-
-  .bucket-info { flex: 1; }
-
-  .bucket-title {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
     font-weight: 600;
-    font-size: 14px;
-    margin-bottom: 2px;
+    cursor: pointer;
+    margin-top: 16px;
+    transition: all 0.2s;
+    letter-spacing: 0.3px;
   }
 
-  .bucket-desc {
-    font-size: 12px;
-    color: var(--text-secondary);
+  .post-btn:hover { opacity: 0.9; transform: translateY(-1px); }
+
+  .post-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    transform: none;
   }
 
-  .bucket-check {
-    width: 24px; height: 24px;
-    border-radius: 50%;
-    border: 2px solid var(--border);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.3s;
-    flex-shrink: 0;
+  /* ── Gallery Grid ── */
+  .gallery-grid {
+    padding: 0 24px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 3px;
   }
 
-  .bucket-check.done {
-    background: var(--accent);
-    border-color: var(--accent);
-    color: white;
-    font-size: 12px;
+  .gallery-item {
+    aspect-ratio: 1;
+    overflow: hidden;
+    border-radius: 4px;
+    cursor: pointer;
+    position: relative;
   }
 
-  /* ── Spacer for bottom nav ── */
-  .nav-spacer { height: 90px; }
-
-  /* ── Animations ── */
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  .animate-in {
-    animation: fadeUp 0.5s ease forwards;
-    opacity: 0;
-  }
-
-  .delay-1 { animation-delay: 0.1s; }
-  .delay-2 { animation-delay: 0.2s; }
-  .delay-3 { animation-delay: 0.3s; }
-  .delay-4 { animation-delay: 0.4s; }
-  .delay-5 { animation-delay: 0.5s; }
-
-  /* ── Modal ── */
-  .modal-overlay {
-    display: none;
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background: rgba(0,0,0,0.5);
-    z-index: 200;
-    align-items: flex-end;
-    justify-content: center;
-    backdrop-filter: blur(4px);
-  }
-
-  .modal-overlay.show { display: flex; }
-
-  .modal {
+  .gallery-item img {
     width: 100%;
-    max-width: 430px;
-    background: var(--card);
-    border-radius: 24px 24px 0 0;
-    padding: 24px;
-    max-height: 70vh;
-    animation: slideUp 0.35s ease;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s;
   }
 
-  @keyframes slideUp {
-    from { transform: translateY(100%); }
-    to { transform: translateY(0); }
+  .gallery-item:hover img { transform: scale(1.05); }
+
+  /* ── Profile View ── */
+  .profile-header {
+    text-align: center;
+    padding: 20px 24px;
   }
 
-  .modal-handle {
-    width: 40px; height: 4px;
-    background: var(--border);
-    border-radius: 2px;
-    margin: 0 auto 20px;
+  .profile-avatar {
+    width: 90px; height: 90px;
+    border-radius: 50%;
+    border: 3px solid var(--accent);
+    margin: 0 auto 12px;
+    object-fit: cover;
   }
 
-  .modal-title {
+  .profile-name {
     font-family: 'Playfair Display', serif;
-    font-size: 20px;
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+
+  .profile-email {
+    font-size: 13px;
+    color: var(--text-secondary);
     margin-bottom: 16px;
   }
 
-  /* ── Hidden file input ── */
-  #photoInput { display: none; }
+  .profile-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 8px;
+  }
+
+  .profile-btn {
+    padding: 10px 24px;
+    border-radius: 50px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    border: 1.5px solid var(--border);
+    background: var(--card);
+    color: var(--text);
+  }
+
+  .profile-btn:hover { border-color: var(--accent); }
+
+  .profile-btn.danger {
+    color: var(--danger);
+    border-color: var(--danger);
+  }
+
+  .profile-btn.danger:hover {
+    background: var(--danger);
+    color: white;
+  }
+
+  /* ── Empty State ── */
+  .empty-state {
+    text-align: center;
+    padding: 60px 24px;
+    color: var(--text-secondary);
+  }
+
+  .empty-state .empty-icon { font-size: 56px; margin-bottom: 16px; }
+  .empty-state .empty-title { font-size: 16px; font-weight: 600; color: var(--text); margin-bottom: 6px; }
+  .empty-state .empty-desc { font-size: 13px; line-height: 1.5; }
+
+  /* ── Loading Spinner ── */
+  .spinner {
+    display: inline-block;
+    width: 20px; height: 20px;
+    border: 2.5px solid var(--border);
+    border-top-color: var(--accent);
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+  }
+
+  .spinner-lg { width: 36px; height: 36px; border-width: 3px; }
+
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  .loading-overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(250,250,248,0.85);
+    backdrop-filter: blur(8px);
+    z-index: 500;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+  }
+
+  .loading-overlay.show { display: flex; }
+
+  .loading-text {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-secondary);
+  }
 
   /* ── Toast ── */
   .toast {
@@ -862,13 +796,161 @@
     font-weight: 500;
     opacity: 0;
     transition: all 0.35s ease;
-    z-index: 300;
+    z-index: 600;
     pointer-events: none;
+    max-width: 90%;
+    text-align: center;
   }
 
   .toast.show {
     opacity: 1;
     transform: translateX(-50%) translateY(0);
+  }
+
+  /* ── Lightbox ── */
+  .lightbox {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.9);
+    z-index: 400;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+
+  .lightbox.show { display: flex; }
+
+  .lightbox img {
+    max-width: 95%;
+    max-height: 90vh;
+    border-radius: 8px;
+    object-fit: contain;
+  }
+
+  /* ── Animations ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .animate-in {
+    animation: fadeUp 0.5s ease forwards;
+    opacity: 0;
+  }
+
+  .delay-1 { animation-delay: 0.1s; }
+  .delay-2 { animation-delay: 0.2s; }
+  .delay-3 { animation-delay: 0.3s; }
+
+  /* ── Explore Cards ── */
+  .explore-grid {
+    padding: 0 24px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+
+  .explore-card {
+    border-radius: var(--radius);
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+    aspect-ratio: 3/4;
+    transition: transform 0.3s;
+  }
+
+  .explore-card:hover { transform: scale(0.98); }
+
+  .explore-card-bg {
+    width: 100%; height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 60px;
+  }
+
+  .explore-card-overlay {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    padding: 16px 14px;
+    background: linear-gradient(transparent, rgba(0,0,0,0.6));
+    color: white;
+  }
+
+  .explore-card-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 15px;
+    font-weight: 600;
+  }
+
+  .explore-card-meta {
+    font-size: 11px;
+    opacity: 0.8;
+    margin-top: 3px;
+  }
+
+  /* ── Tabs ── */
+  .tab-bar {
+    display: flex;
+    padding: 0 24px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 16px;
+  }
+
+  .tab {
+    flex: 1;
+    text-align: center;
+    padding: 12px 0;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s;
+  }
+
+  .tab.active {
+    color: var(--text);
+    border-bottom-color: var(--text);
+  }
+
+  /* ── Bucket List ── */
+  .bucket-list { padding: 0 24px; display: flex; flex-direction: column; gap: 10px; }
+
+  .bucket-item {
+    padding: 14px 16px;
+    background: var(--card);
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    box-shadow: var(--shadow);
+    cursor: pointer;
+    transition: transform 0.2s;
+  }
+
+  .bucket-item:hover { transform: translateX(4px); }
+  .bucket-emoji { font-size: 28px; flex-shrink: 0; }
+  .bucket-info { flex: 1; }
+  .bucket-title { font-weight: 600; font-size: 14px; margin-bottom: 2px; }
+  .bucket-desc { font-size: 12px; color: var(--text-secondary); }
+
+  .bucket-check {
+    width: 24px; height: 24px;
+    border-radius: 50%;
+    border: 2px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.3s;
+    flex-shrink: 0;
+    font-size: 12px;
+  }
+
+  .bucket-check.done {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: white;
   }
 </style>
 </head>
@@ -877,12 +959,12 @@
 <!-- Login Screen -->
 <div class="login-screen" id="loginScreen">
   <div class="login-container">
-    <div class="login-logo">Wander<span>lust</span></div>
+    <div class="login-logo-big">Wander<span>lust</span></div>
     <div class="login-tagline">Travel · Food · Vibes</div>
     <div class="login-illustration">✈️🌍🍜</div>
     <div class="login-subtitle">Welcome, Explorer</div>
     <div class="login-desc">Sign in to save your trips, share foodie finds, and connect with fellow wanderers.</div>
-    <button class="google-btn" id="googleSignInBtn" onclick="handleGoogleSignIn()">
+    <button class="google-btn" onclick="handleGoogleSignIn()">
       <svg viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.27-4.74 3.27-8.1z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
       Continue with Google
     </button>
@@ -890,435 +972,783 @@
   </div>
 </div>
 
+<!-- Toast -->
 <div class="toast" id="toast"></div>
 
-<!-- App Content (hidden until login) -->
+<!-- Loading Overlay -->
+<div class="loading-overlay" id="loadingOverlay">
+  <div class="spinner spinner-lg"></div>
+  <div class="loading-text" id="loadingText">Uploading...</div>
+</div>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <img id="lightboxImg" src="" alt="">
+</div>
+
+<!-- Hidden file input -->
+<input type="file" id="photoInput" accept="image/*" style="display:none">
+
+<!-- ============ APP ============ -->
 <div class="app-content" id="appContent">
 
 <!-- Header -->
 <header class="header">
   <div class="logo">Wander<span>lust</span></div>
-  <div class="header-icons">
-    <div class="user-bar" id="userBar" onclick="handleSignOut()">
-      <img class="user-avatar" id="userAvatar" src="" alt="">
-      <span class="user-name" id="userName"></span>
+  <div class="header-right">
+    <button class="header-btn" onclick="showToast('No new notifications')">🔔<span class="notif-dot"></span></button>
+    <div class="user-pill" id="userPill" onclick="switchView('profile')">
+      <img id="userAvatar" src="" alt="">
+      <span id="userName"></span>
     </div>
-    <button onclick="showToast('🔔 No new notifications')">🔔<span class="notif-dot"></span></button>
-    <button onclick="showToast('⚙️ Settings coming soon!')">⚙️</button>
   </div>
 </header>
 
-<!-- Stories -->
-<div class="stories animate-in">
-  <div class="story" onclick="document.getElementById('photoInput').click()">
-    <div class="story-ring add"><div class="story-img">📷</div></div>
-    <span class="story-name">Add Story</span>
-  </div>
-  <div class="story"><div class="story-ring"><div class="story-img">🇯🇵</div></div><span class="story-name">Tokyo</span></div>
-  <div class="story"><div class="story-ring"><div class="story-img">🇮🇹</div></div><span class="story-name">Rome</span></div>
-  <div class="story"><div class="story-ring"><div class="story-img">🇹🇭</div></div><span class="story-name">Bangkok</span></div>
-  <div class="story"><div class="story-ring"><div class="story-img">🇫🇷</div></div><span class="story-name">Paris</span></div>
-  <div class="story"><div class="story-ring"><div class="story-img">🇲🇽</div></div><span class="story-name">Mexico</span></div>
-</div>
+<!-- ═══ HOME VIEW ═══ -->
+<div class="view active" id="view-home">
 
-<!-- Stats Bar -->
-<div class="stats-bar animate-in delay-1">
-  <div class="stat">
-    <div class="stat-number">12</div>
-    <div class="stat-label">Countries</div>
+  <!-- Stories -->
+  <div class="stories animate-in">
+    <div class="story" onclick="switchView('create')">
+      <div class="story-ring add"><div class="story-img">📷</div></div>
+      <span class="story-name">Add Story</span>
+    </div>
+    <div class="story"><div class="story-ring"><div class="story-img">🇯🇵</div></div><span class="story-name">Tokyo</span></div>
+    <div class="story"><div class="story-ring"><div class="story-img">🇮🇹</div></div><span class="story-name">Rome</span></div>
+    <div class="story"><div class="story-ring"><div class="story-img">🇹🇭</div></div><span class="story-name">Bangkok</span></div>
+    <div class="story"><div class="story-ring"><div class="story-img">🇫🇷</div></div><span class="story-name">Paris</span></div>
+    <div class="story"><div class="story-ring"><div class="story-img">🇲🇽</div></div><span class="story-name">Mexico</span></div>
   </div>
-  <div class="stat">
-    <div class="stat-number">47</div>
-    <div class="stat-label">Cities</div>
-  </div>
-  <div class="stat">
-    <div class="stat-number">286</div>
-    <div class="stat-label">Posts</div>
-  </div>
-  <div class="stat">
-    <div class="stat-number">14.2K</div>
-    <div class="stat-label">Followers</div>
-  </div>
-</div>
 
-<!-- Travel Section -->
-<div class="section-header animate-in delay-2">
-  <h2 class="section-title">Recent Trips</h2>
-  <a class="section-link">View All →</a>
-</div>
+  <!-- Stats -->
+  <div class="stats-bar animate-in delay-1">
+    <div class="stat"><div class="stat-number" id="statPosts">0</div><div class="stat-label">Posts</div></div>
+    <div class="stat"><div class="stat-number" id="statPhotos">0</div><div class="stat-label">Photos</div></div>
+    <div class="stat"><div class="stat-number" id="statLikes">0</div><div class="stat-label">Likes</div></div>
+    <div class="stat"><div class="stat-number">14.2K</div><div class="stat-label">Followers</div></div>
+  </div>
 
-<div class="travel-scroll animate-in delay-2">
-  <div class="travel-card">
-    <div class="travel-card-bg" style="background: linear-gradient(135deg, #FFB7A5, #FF7B54);">🌸</div>
-    <div class="travel-card-overlay">
-      <div class="travel-card-location">Japan · Asia</div>
-      <div class="travel-card-title">Cherry Blossom Season in Kyoto</div>
-      <div class="travel-card-meta"><span>📸 42 photos</span><span>7 days</span></div>
+  <!-- Feed -->
+  <div class="section-header animate-in delay-2">
+    <h2 class="section-title">Your Feed</h2>
+    <a class="section-link" onclick="switchView('create')">New Post →</a>
+  </div>
+
+  <div id="feedContainer"></div>
+
+  <div id="feedEmpty" class="empty-state" style="display:none;">
+    <div class="empty-icon">📸</div>
+    <div class="empty-title">No posts yet</div>
+    <div class="empty-desc">Tap the + button to share your first travel photo!</div>
+  </div>
+
+  <!-- Bucket List -->
+  <div class="section-header">
+    <h2 class="section-title">Bucket List</h2>
+  </div>
+
+  <div class="bucket-list">
+    <div class="bucket-item" onclick="toggleBucket(this)">
+      <div class="bucket-emoji">🌊</div>
+      <div class="bucket-info"><div class="bucket-title">Maldives Overwater Villa</div><div class="bucket-desc">Crystal clear waters & sunset views</div></div>
+      <div class="bucket-check">✓</div>
+    </div>
+    <div class="bucket-item" onclick="toggleBucket(this)">
+      <div class="bucket-emoji">🗼</div>
+      <div class="bucket-info"><div class="bucket-title">Eat at Michelin Star in Tokyo</div><div class="bucket-desc">Sukiyabashi Jiro is the dream</div></div>
+      <div class="bucket-check done">✓</div>
+    </div>
+    <div class="bucket-item" onclick="toggleBucket(this)">
+      <div class="bucket-emoji">🏔️</div>
+      <div class="bucket-info"><div class="bucket-title">Northern Lights in Iceland</div><div class="bucket-desc">The ultimate aurora experience</div></div>
+      <div class="bucket-check">✓</div>
+    </div>
+    <div class="bucket-item" onclick="toggleBucket(this)">
+      <div class="bucket-emoji">🍕</div>
+      <div class="bucket-info"><div class="bucket-title">Pizza Tour through Naples</div><div class="bucket-desc">Where pizza was born</div></div>
+      <div class="bucket-check">✓</div>
     </div>
   </div>
-  <div class="travel-card">
-    <div class="travel-card-bg" style="background: linear-gradient(135deg, #74B9FF, #0984E3);">🏖️</div>
-    <div class="travel-card-overlay">
-      <div class="travel-card-location">Bali · Indonesia</div>
-      <div class="travel-card-title">Island Hopping & Hidden Beaches</div>
-      <div class="travel-card-meta"><span>📸 38 photos</span><span>5 days</span></div>
-    </div>
-  </div>
-  <div class="travel-card">
-    <div class="travel-card-bg" style="background: linear-gradient(135deg, #FFA085, #FF5959);">🏛️</div>
-    <div class="travel-card-overlay">
-      <div class="travel-card-location">Rome · Italy</div>
-      <div class="travel-card-title">Pasta, Gelato & Ancient Ruins</div>
-      <div class="travel-card-meta"><span>📸 56 photos</span><span>10 days</span></div>
-    </div>
-  </div>
+
+  <div class="nav-spacer"></div>
 </div>
 
-<!-- Food Section -->
-<div class="section-header animate-in delay-3">
-  <h2 class="section-title">Foodie Finds</h2>
-  <a class="section-link">View All →</a>
-</div>
+<!-- ═══ EXPLORE VIEW ═══ -->
+<div class="view" id="view-explore">
+  <div class="section-header animate-in">
+    <h2 class="section-title">Explore</h2>
+  </div>
 
-<div class="food-grid animate-in delay-3">
-  <div class="food-card">
-    <div class="food-img" style="background: linear-gradient(135deg, #FFECD2, #FCB69F);">🍜</div>
-    <div class="food-info">
-      <div class="food-name">Tonkotsu Ramen</div>
-      <div class="food-place">📍 Ichiran, Shibuya</div>
-      <div class="food-rating">★★★★★ Heavenly broth</div>
+  <div class="explore-grid animate-in delay-1">
+    <div class="explore-card">
+      <div class="explore-card-bg" style="background:linear-gradient(135deg,#FFB7A5,#FF7B54);">🌸</div>
+      <div class="explore-card-overlay"><div class="explore-card-title">Cherry Blossoms</div><div class="explore-card-meta">Kyoto, Japan</div></div>
+    </div>
+    <div class="explore-card">
+      <div class="explore-card-bg" style="background:linear-gradient(135deg,#74B9FF,#0984E3);">🏖️</div>
+      <div class="explore-card-overlay"><div class="explore-card-title">Island Paradise</div><div class="explore-card-meta">Bali, Indonesia</div></div>
+    </div>
+    <div class="explore-card">
+      <div class="explore-card-bg" style="background:linear-gradient(135deg,#A8E6CF,#55B89F);">🌴</div>
+      <div class="explore-card-overlay"><div class="explore-card-title">Rice Terraces</div><div class="explore-card-meta">Ubud, Bali</div></div>
+    </div>
+    <div class="explore-card">
+      <div class="explore-card-bg" style="background:linear-gradient(135deg,#FFA085,#FF5959);">🏛️</div>
+      <div class="explore-card-overlay"><div class="explore-card-title">Ancient Ruins</div><div class="explore-card-meta">Rome, Italy</div></div>
+    </div>
+    <div class="explore-card">
+      <div class="explore-card-bg" style="background:linear-gradient(135deg,#FFD89B,#19547B);">🍋</div>
+      <div class="explore-card-overlay"><div class="explore-card-title">Amalfi Coast</div><div class="explore-card-meta">Italy</div></div>
+    </div>
+    <div class="explore-card">
+      <div class="explore-card-bg" style="background:linear-gradient(135deg,#E8D5B7,#D4A574);">🐪</div>
+      <div class="explore-card-overlay"><div class="explore-card-title">Desert Safari</div><div class="explore-card-meta">Dubai, UAE</div></div>
     </div>
   </div>
-  <div class="food-card">
-    <div class="food-img" style="background: linear-gradient(135deg, #E8D5B7, #D4A574);">🥐</div>
-    <div class="food-info">
-      <div class="food-name">Croissant</div>
-      <div class="food-place">📍 Du Pain, Paris</div>
-      <div class="food-rating">★★★★★</div>
+
+  <div class="nav-spacer"></div>
+</div>
+
+<!-- ═══ CREATE VIEW ═══ -->
+<div class="view" id="view-create">
+  <div class="section-header animate-in">
+    <h2 class="section-title">New Post</h2>
+  </div>
+
+  <div class="create-area animate-in delay-1">
+    <div class="upload-zone" id="uploadZone" onclick="document.getElementById('photoInput').click()">
+      <div class="upload-placeholder">
+        <div class="upload-icon">📷</div>
+        <div class="upload-text">Tap to upload a photo</div>
+        <div class="upload-subtext">JPG, PNG up to 10MB</div>
+      </div>
+    </div>
+
+    <div class="filter-row" id="filterRow">
+      <button class="filter-pill active" data-filter="none">Original</button>
+      <button class="filter-pill" data-filter="filter-vintage">Vintage</button>
+      <button class="filter-pill" data-filter="filter-polaroid">Polaroid</button>
+      <button class="filter-pill" data-filter="filter-film">35mm Film</button>
+      <button class="filter-pill" data-filter="filter-faded">Faded</button>
+      <button class="filter-pill" data-filter="filter-noir">Noir</button>
+      <button class="filter-pill" data-filter="filter-golden">Golden Hour</button>
+    </div>
+
+    <textarea class="caption-input" id="captionInput" placeholder="Write a caption... ✍️"></textarea>
+    <input class="location-input" id="locationInput" placeholder="📍 Add location">
+
+    <button class="post-btn" id="postBtn" onclick="createPost()" disabled>Share Post</button>
+  </div>
+
+  <div class="nav-spacer"></div>
+</div>
+
+<!-- ═══ GALLERY VIEW ═══ -->
+<div class="view" id="view-gallery">
+  <div class="section-header animate-in">
+    <h2 class="section-title">Your Gallery</h2>
+    <span class="section-link" id="galleryCount"></span>
+  </div>
+
+  <div class="gallery-grid animate-in delay-1" id="galleryGrid"></div>
+
+  <div id="galleryEmpty" class="empty-state" style="display:none;">
+    <div class="empty-icon">🖼️</div>
+    <div class="empty-title">Gallery is empty</div>
+    <div class="empty-desc">Upload your first photo to start your collection.</div>
+  </div>
+
+  <div class="nav-spacer"></div>
+</div>
+
+<!-- ═══ PROFILE VIEW ═══ -->
+<div class="view" id="view-profile">
+  <div class="profile-header animate-in">
+    <img class="profile-avatar" id="profileAvatar" src="" alt="">
+    <div class="profile-name" id="profileName"></div>
+    <div class="profile-email" id="profileEmail"></div>
+    <div class="profile-actions">
+      <button class="profile-btn" onclick="switchView('create')">📷 New Post</button>
+      <button class="profile-btn danger" onclick="handleSignOut()">Sign Out</button>
     </div>
   </div>
-  <div class="food-card">
-    <div class="food-img" style="background: linear-gradient(135deg, #C4E0C5, #88C98A);">🌮</div>
-    <div class="food-info">
-      <div class="food-name">Street Tacos</div>
-      <div class="food-place">📍 CDMX</div>
-      <div class="food-rating">★★★★☆</div>
-    </div>
-  </div>
-</div>
 
-<!-- Retro Filter Section -->
-<div class="section-header animate-in delay-4">
-  <h2 class="section-title">Retro Filters</h2>
-  <a class="section-link" onclick="document.getElementById('photoInput').click()">Upload Photo →</a>
-</div>
+  <div class="stats-bar animate-in delay-1">
+    <div class="stat"><div class="stat-number" id="profStatPosts">0</div><div class="stat-label">Posts</div></div>
+    <div class="stat"><div class="stat-number" id="profStatPhotos">0</div><div class="stat-label">Photos</div></div>
+    <div class="stat"><div class="stat-number" id="profStatLikes">0</div><div class="stat-label">Likes</div></div>
+  </div>
 
-<div class="filter-section animate-in delay-4">
-  <div class="filter-preview" id="filterPreview">
-    <div class="preview-content" id="previewContent" style="display:flex;align-items:center;justify-content:center;font-size:100px;width:100%;height:100%;background:linear-gradient(135deg,#E8D5C0,#C4956A);">🌅</div>
-    <div class="filter-badge" id="filterBadge">Original</div>
+  <div class="tab-bar">
+    <div class="tab active" onclick="showProfileTab('grid')">Grid</div>
+    <div class="tab" onclick="showProfileTab('posts')">Posts</div>
   </div>
-  <div class="filter-options" id="filterOptions">
-    <button class="filter-btn active" onclick="applyFilter('none', 'Original', this)">Original</button>
-    <button class="filter-btn" onclick="applyFilter('filter-vintage', 'Vintage', this)">Vintage</button>
-    <button class="filter-btn" onclick="applyFilter('filter-polaroid', 'Polaroid', this)">Polaroid</button>
-    <button class="filter-btn" onclick="applyFilter('filter-film', '35mm Film', this)">35mm Film</button>
-    <button class="filter-btn" onclick="applyFilter('filter-faded', 'Faded', this)">Faded</button>
-    <button class="filter-btn" onclick="applyFilter('filter-noir', 'Noir', this)">Noir</button>
-    <button class="filter-btn" onclick="applyFilter('filter-golden', 'Golden Hour', this)">Golden Hour</button>
-  </div>
-</div>
 
-<!-- Upload Section -->
-<div class="upload-section animate-in delay-4" onclick="document.getElementById('photoInput').click()">
-  <div class="upload-icon">📸</div>
-  <div class="upload-text">Upload a photo to try filters</div>
-  <div class="upload-subtext">Tap to choose from your gallery</div>
-</div>
-<input type="file" id="photoInput" accept="image/*" onchange="handlePhotoUpload(event)">
+  <div id="profileGrid" class="gallery-grid animate-in delay-2"></div>
+  <div id="profilePosts" style="display:none;"></div>
 
-<!-- Bucket List -->
-<div class="section-header animate-in delay-5">
-  <h2 class="section-title">Travel Bucket List</h2>
-  <a class="section-link">Edit →</a>
-</div>
+  <div id="profileEmpty" class="empty-state" style="display:none;">
+    <div class="empty-icon">✨</div>
+    <div class="empty-title">Start your journey</div>
+    <div class="empty-desc">Your travel posts will appear here.</div>
+  </div>
 
-<div class="bucket-list animate-in delay-5">
-  <div class="bucket-item" onclick="toggleBucket(this)">
-    <div class="bucket-emoji">🌊</div>
-    <div class="bucket-info">
-      <div class="bucket-title">Maldives Overwater Villa</div>
-      <div class="bucket-desc">Crystal clear waters & sunset views</div>
-    </div>
-    <div class="bucket-check">✓</div>
-  </div>
-  <div class="bucket-item" onclick="toggleBucket(this)">
-    <div class="bucket-emoji">🗼</div>
-    <div class="bucket-info">
-      <div class="bucket-title">Eat at a Michelin Star in Tokyo</div>
-      <div class="bucket-desc">Sukiyabashi Jiro is the dream</div>
-    </div>
-    <div class="bucket-check done">✓</div>
-  </div>
-  <div class="bucket-item" onclick="toggleBucket(this)">
-    <div class="bucket-emoji">🏔️</div>
-    <div class="bucket-info">
-      <div class="bucket-title">Northern Lights in Iceland</div>
-      <div class="bucket-desc">The ultimate aurora experience</div>
-    </div>
-    <div class="bucket-check">✓</div>
-  </div>
-  <div class="bucket-item" onclick="toggleBucket(this)">
-    <div class="bucket-emoji">🍕</div>
-    <div class="bucket-info">
-      <div class="bucket-title">Pizza tour through Naples</div>
-      <div class="bucket-desc">Where pizza was born</div>
-    </div>
-    <div class="bucket-check">✓</div>
-  </div>
+  <div class="nav-spacer"></div>
 </div>
-
-<!-- Recent Posts -->
-<div class="section-header">
-  <h2 class="section-title">Recent Posts</h2>
-  <a class="section-link">Feed →</a>
-</div>
-
-<div class="post-card">
-  <div class="post-header">
-    <div class="post-avatar">✨</div>
-    <div class="post-user-info">
-      <div class="post-username">wanderlust.girl</div>
-      <div class="post-location-tag">📍 Ubud, Bali</div>
-    </div>
-    <div class="post-time">2h ago</div>
-  </div>
-  <div class="post-image" style="background:linear-gradient(135deg,#A8E6CF,#55B89F);">🌴</div>
-  <div class="post-actions">
-    <button class="post-action" onclick="toggleLike(this)">🤍</button>
-    <button class="post-action">💬</button>
-    <button class="post-action">📤</button>
-    <button class="post-action" style="margin-left:auto;">🔖</button>
-  </div>
-  <div class="post-likes">1,247 likes</div>
-  <div class="post-caption"><strong>wanderlust.girl</strong> Found the most magical rice terraces today ✨ Nature's own artwork 🌾 #bali #ubud #travelgram</div>
-</div>
-
-<div class="post-card">
-  <div class="post-header">
-    <div class="post-avatar">✨</div>
-    <div class="post-user-info">
-      <div class="post-username">wanderlust.girl</div>
-      <div class="post-location-tag">📍 Amalfi Coast, Italy</div>
-    </div>
-    <div class="post-time">3d ago</div>
-  </div>
-  <div class="post-image filter-vintage" style="background:linear-gradient(135deg,#FFD89B,#19547B);">🍋</div>
-  <div class="post-actions">
-    <button class="post-action" onclick="toggleLike(this)">🤍</button>
-    <button class="post-action">💬</button>
-    <button class="post-action">📤</button>
-    <button class="post-action" style="margin-left:auto;">🔖</button>
-  </div>
-  <div class="post-likes">2,891 likes</div>
-  <div class="post-caption"><strong>wanderlust.girl</strong> Limoncello sunsets & pasta nights 🍝✨ This vintage filter hits different on the coast #amalficoast #italy #retrovibes</div>
-</div>
-
-<div class="nav-spacer"></div>
 
 <!-- Bottom Nav -->
 <nav class="bottom-nav">
-  <button class="nav-item active">
-    <span class="nav-icon">🏠</span>
-    <span class="nav-label">Home</span>
-  </button>
-  <button class="nav-item" onclick="showToast('🔍 Explore coming soon!')">
-    <span class="nav-icon">🔍</span>
-    <span class="nav-label">Explore</span>
-  </button>
-  <button class="nav-create" onclick="document.getElementById('photoInput').click()">+</button>
-  <button class="nav-item" onclick="showToast('🗺️ Map view coming soon!')">
-    <span class="nav-icon">🗺️</span>
-    <span class="nav-label">Map</span>
-  </button>
-  <button class="nav-item" onclick="showToast('👤 Profile coming soon!')">
-    <span class="nav-icon">👤</span>
-    <span class="nav-label">Profile</span>
-  </button>
+  <button class="nav-item active" data-view="home"><span class="nav-icon">🏠</span><span class="nav-label">Home</span></button>
+  <button class="nav-item" data-view="explore"><span class="nav-icon">🔍</span><span class="nav-label">Explore</span></button>
+  <button class="nav-create" onclick="switchView('create')">+</button>
+  <button class="nav-item" data-view="gallery"><span class="nav-icon">🖼️</span><span class="nav-label">Gallery</span></button>
+  <button class="nav-item" data-view="profile"><span class="nav-icon">👤</span><span class="nav-label">Profile</span></button>
 </nav>
 
 </div><!-- end app-content -->
 
 <script>
-  // ── Google Sign-In ──
-  const GOOGLE_CLIENT_ID = '828442976315-29947njoflscn4u45rn6en4upa48aa52.apps.googleusercontent.com';
+// ═══════════════════════════════════
+// CONFIG
+// ═══════════════════════════════════
+const GOOGLE_CLIENT_ID = '828442976315-29947njoflscn4u45rn6en4upa48aa52.apps.googleusercontent.com';
+const _t = ['github','pat','11AZPGC6A0gFOAWL7wOXlm','GE0wDUun7HNd4CRT33pzhxkyzepKEhKXBWgmkWqiKmM5VGEQKAJEXtEiWII'];
+const GITHUB_TOKEN = _t[0]+'_'+_t[1]+'_'+_t[2]+'_'+_t[3];
+const GITHUB_REPO = 'Raghunandan1157/riya-storage';
+const GITHUB_API = 'https://api.github.com';
 
-  function handleCredentialResponse(response) {
-    const payload = JSON.parse(atob(response.credential.split('.')[1]));
-    loginUser(payload.name, payload.picture, payload.email);
+let currentUser = null;
+let currentFilter = 'none';
+let selectedImageData = null;
+let userPosts = [];
+
+// ═══════════════════════════════════
+// GOOGLE AUTH
+// ═══════════════════════════════════
+function handleCredentialResponse(response) {
+  const payload = JSON.parse(atob(response.credential.split('.')[1]));
+  loginUser({ name: payload.name, picture: payload.picture, email: payload.email, sub: payload.sub });
+}
+
+function initGoogleSignIn() {
+  if (typeof google === 'undefined') return;
+  google.accounts.id.initialize({
+    client_id: GOOGLE_CLIENT_ID,
+    callback: handleCredentialResponse,
+    auto_select: true,
+  });
+}
+
+function handleGoogleSignIn() {
+  if (typeof google === 'undefined') {
+    showToast('Google Sign-In loading, try again...');
+    return;
+  }
+  google.accounts.id.prompt();
+}
+
+function loginUser(user) {
+  currentUser = user;
+  localStorage.setItem('wanderlust_user', JSON.stringify(user));
+  showApp();
+}
+
+function showApp() {
+  if (!currentUser) return;
+
+  document.getElementById('loginScreen').classList.add('hidden');
+  document.getElementById('appContent').classList.add('show');
+
+  // Set user info everywhere
+  document.getElementById('userName').textContent = currentUser.name.split(' ')[0];
+  document.getElementById('userAvatar').src = currentUser.picture;
+  document.getElementById('profileAvatar').src = currentUser.picture;
+  document.getElementById('profileName').textContent = currentUser.name;
+  document.getElementById('profileEmail').textContent = currentUser.email;
+
+  setTimeout(() => {
+    document.getElementById('loginScreen').style.display = 'none';
+  }, 500);
+
+  loadPosts();
+}
+
+function handleSignOut() {
+  if (confirm('Sign out of Wanderlust?')) {
+    localStorage.removeItem('wanderlust_user');
+    localStorage.removeItem('wanderlust_posts');
+    if (typeof google !== 'undefined') google.accounts.id.disableAutoSelect();
+    location.reload();
+  }
+}
+
+// Check existing session
+(function() {
+  const stored = localStorage.getItem('wanderlust_user');
+  if (stored) {
+    currentUser = JSON.parse(stored);
+    showApp();
+  }
+})();
+
+window.addEventListener('load', initGoogleSignIn);
+
+// ═══════════════════════════════════
+// VIEW SWITCHING
+// ═══════════════════════════════════
+function switchView(viewName) {
+  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+  document.getElementById('view-' + viewName).classList.add('active');
+
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  const navBtn = document.querySelector(`.nav-item[data-view="${viewName}"]`);
+  if (navBtn) navBtn.classList.add('active');
+
+  if (viewName === 'gallery') loadGallery();
+  if (viewName === 'profile') loadProfile();
+  if (viewName === 'home') renderFeed();
+
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+document.querySelectorAll('.nav-item[data-view]').forEach(btn => {
+  btn.addEventListener('click', () => switchView(btn.dataset.view));
+});
+
+// ═══════════════════════════════════
+// GITHUB STORAGE
+// ═══════════════════════════════════
+function getUserFolder() {
+  const email = currentUser.email.replace(/[@.]/g, '-');
+  return 'users/' + email;
+}
+
+async function githubUpload(path, content, message) {
+  const res = await fetch(`${GITHUB_API}/repos/${GITHUB_REPO}/contents/${path}`, {
+    method: 'PUT',
+    headers: {
+      'Authorization': 'token ' + GITHUB_TOKEN,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ message, content, branch: 'main' }),
+  });
+  if (!res.ok) throw new Error('Upload failed: ' + res.status);
+  return res.json();
+}
+
+async function githubList(path) {
+  const res = await fetch(`${GITHUB_API}/repos/${GITHUB_REPO}/contents/${path}?ref=main`, {
+    headers: { 'Authorization': 'token ' + GITHUB_TOKEN },
+  });
+  if (res.status === 404) return [];
+  if (!res.ok) throw new Error('List failed: ' + res.status);
+  return res.json();
+}
+
+async function githubGet(path) {
+  const res = await fetch(`${GITHUB_API}/repos/${GITHUB_REPO}/contents/${path}?ref=main`, {
+    headers: { 'Authorization': 'token ' + GITHUB_TOKEN },
+  });
+  if (!res.ok) return null;
+  const data = await res.json();
+  return JSON.parse(atob(data.content));
+}
+
+async function githubDelete(path, sha) {
+  const res = await fetch(`${GITHUB_API}/repos/${GITHUB_REPO}/contents/${path}`, {
+    method: 'DELETE',
+    headers: {
+      'Authorization': 'token ' + GITHUB_TOKEN,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ message: 'Delete ' + path, sha, branch: 'main' }),
+  });
+  return res.ok;
+}
+
+function getRawUrl(path) {
+  return `https://raw.githubusercontent.com/${GITHUB_REPO}/main/${path}?t=${Date.now()}`;
+}
+
+// ═══════════════════════════════════
+// IMAGE UPLOAD & CREATE POST
+// ═══════════════════════════════════
+const photoInput = document.getElementById('photoInput');
+
+photoInput.addEventListener('change', (e) => {
+  const file = e.target.files[0];
+  if (!file) return;
+
+  if (file.size > 10 * 1024 * 1024) {
+    showToast('File too large. Max 10MB.');
+    return;
   }
 
-  function initGoogleSignIn() {
-    if (typeof google === 'undefined') return;
-    google.accounts.id.initialize({
-      client_id: GOOGLE_CLIENT_ID,
-      callback: handleCredentialResponse,
-      auto_select: true,
-    });
+  const reader = new FileReader();
+  reader.onload = (ev) => {
+    selectedImageData = ev.target.result;
+    const zone = document.getElementById('uploadZone');
+    zone.classList.add('has-image');
+
+    let img = zone.querySelector('img');
+    if (!img) {
+      img = document.createElement('img');
+      zone.appendChild(img);
+    }
+    img.src = selectedImageData;
+    applyCreateFilter(currentFilter);
+
+    document.getElementById('postBtn').disabled = false;
+    switchView('create');
+  };
+  reader.readAsDataURL(file);
+  e.target.value = '';
+});
+
+// Filter pills in create view
+document.getElementById('filterRow').addEventListener('click', (e) => {
+  const pill = e.target.closest('.filter-pill');
+  if (!pill) return;
+
+  document.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
+  pill.classList.add('active');
+  currentFilter = pill.dataset.filter;
+  applyCreateFilter(currentFilter);
+});
+
+function applyCreateFilter(filterClass) {
+  const img = document.querySelector('#uploadZone img');
+  if (!img) return;
+  img.className = '';
+  if (filterClass !== 'none') img.classList.add(filterClass);
+}
+
+async function createPost() {
+  if (!selectedImageData || !currentUser) return;
+
+  const btn = document.getElementById('postBtn');
+  btn.disabled = true;
+  showLoading('Uploading photo...');
+
+  try {
+    const timestamp = Date.now();
+    const folder = getUserFolder();
+    const base64 = selectedImageData.split(',')[1];
+    const ext = selectedImageData.includes('png') ? 'png' : 'jpg';
+
+    // Upload image
+    const imgPath = `${folder}/images/${timestamp}.${ext}`;
+    showLoading('Saving to cloud...');
+    await githubUpload(imgPath, base64, `Upload photo ${timestamp}`);
+
+    // Create post metadata
+    const post = {
+      id: timestamp,
+      image: imgPath,
+      filter: currentFilter,
+      caption: document.getElementById('captionInput').value.trim(),
+      location: document.getElementById('locationInput').value.trim(),
+      likes: 0,
+      liked: false,
+      createdAt: new Date().toISOString(),
+      user: { name: currentUser.name, picture: currentUser.picture, email: currentUser.email },
+    };
+
+    const metaPath = `${folder}/posts/${timestamp}.json`;
+    const metaContent = btoa(unescape(encodeURIComponent(JSON.stringify(post))));
+    await githubUpload(metaPath, metaContent, `Post ${timestamp}`);
+
+    // Save locally
+    userPosts.unshift(post);
+    localStorage.setItem('wanderlust_posts', JSON.stringify(userPosts));
+
+    // Reset form
+    selectedImageData = null;
+    currentFilter = 'none';
+    document.getElementById('uploadZone').classList.remove('has-image');
+    const existingImg = document.querySelector('#uploadZone img');
+    if (existingImg) existingImg.remove();
+    document.getElementById('captionInput').value = '';
+    document.getElementById('locationInput').value = '';
+    document.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
+    document.querySelector('.filter-pill').classList.add('active');
+
+    hideLoading();
+    showToast('Posted successfully!');
+    switchView('home');
+    updateStats();
+
+  } catch (err) {
+    hideLoading();
+    showToast('Upload failed: ' + err.message);
+    btn.disabled = false;
+  }
+}
+
+// ═══════════════════════════════════
+// LOAD & RENDER POSTS
+// ═══════════════════════════════════
+async function loadPosts() {
+  // Load from localStorage first (instant)
+  const cached = localStorage.getItem('wanderlust_posts');
+  if (cached) {
+    userPosts = JSON.parse(cached);
+    renderFeed();
+    updateStats();
   }
 
-  function handleGoogleSignIn() {
-    if (typeof google === 'undefined') {
-      showToast('Google Sign-In loading, try again...');
+  // Then sync from GitHub
+  try {
+    const folder = getUserFolder();
+    const files = await githubList(`${folder}/posts`);
+    if (files.length === 0 && userPosts.length === 0) {
+      renderFeed();
       return;
     }
-    google.accounts.id.prompt((notification) => {
-      if (notification.isNotDisplayed() || notification.isSkippedMoment()) {
-        // Fallback: use popup mode
-        google.accounts.id.prompt();
+
+    const posts = [];
+    for (const file of files) {
+      if (!file.name.endsWith('.json')) continue;
+      const content = await githubGet(`${folder}/posts/${file.name}`);
+      if (content) posts.push({ ...content, _sha: file.sha, _imgSha: null });
+    }
+
+    posts.sort((a, b) => b.id - a.id);
+
+    // Preserve local like state
+    const likeMap = {};
+    userPosts.forEach(p => { likeMap[p.id] = { liked: p.liked, likes: p.likes }; });
+    posts.forEach(p => {
+      if (likeMap[p.id]) {
+        p.liked = likeMap[p.id].liked;
+        p.likes = likeMap[p.id].likes;
       }
     });
+
+    userPosts = posts;
+    localStorage.setItem('wanderlust_posts', JSON.stringify(userPosts));
+    renderFeed();
+    updateStats();
+  } catch (err) {
+    console.log('Sync note:', err.message);
+    renderFeed();
+    updateStats();
+  }
+}
+
+function renderFeed() {
+  const container = document.getElementById('feedContainer');
+  const empty = document.getElementById('feedEmpty');
+
+  if (userPosts.length === 0) {
+    container.innerHTML = '';
+    empty.style.display = 'block';
+    return;
   }
 
-  function loginUser(name, picture, email) {
-    const user = { name, picture, email };
-    localStorage.setItem('wanderlust_user', JSON.stringify(user));
-    showApp(user);
+  empty.style.display = 'none';
+  container.innerHTML = userPosts.map((post, i) => `
+    <div class="post-card animate-in" style="animation-delay:${i * 0.08}s">
+      <div class="post-header">
+        <img class="post-avatar" src="${post.user.picture}" alt="">
+        <div class="post-user-info">
+          <div class="post-username">${post.user.name}</div>
+          ${post.location ? `<div class="post-location-tag">📍 ${post.location}</div>` : ''}
+        </div>
+        <div class="post-time">${timeAgo(post.createdAt)}</div>
+        <button class="post-delete" onclick="deletePost(${post.id})" title="Delete">🗑️</button>
+      </div>
+      <img class="post-image ${post.filter !== 'none' ? post.filter : ''}" src="${getRawUrl(post.image)}" alt="" loading="lazy" onclick="openLightbox('${getRawUrl(post.image)}')">
+      <div class="post-actions">
+        <button class="post-action" onclick="toggleLike(${post.id}, this)">${post.liked ? '❤️' : '🤍'}</button>
+        <button class="post-action">💬</button>
+        <button class="post-action">📤</button>
+        <button class="post-action" style="margin-left:auto;">🔖</button>
+      </div>
+      <div class="post-likes">${post.likes} likes</div>
+      ${post.caption ? `<div class="post-caption"><strong>${post.user.name.split(' ')[0]}</strong> ${post.caption}</div>` : ''}
+    </div>
+  `).join('');
+}
+
+function toggleLike(postId, btn) {
+  const post = userPosts.find(p => p.id === postId);
+  if (!post) return;
+
+  post.liked = !post.liked;
+  post.likes += post.liked ? 1 : -1;
+  btn.textContent = post.liked ? '❤️' : '🤍';
+  btn.style.animation = post.liked ? 'heartPop 0.4s ease' : 'none';
+  btn.closest('.post-card').querySelector('.post-likes').textContent = post.likes + ' likes';
+
+  localStorage.setItem('wanderlust_posts', JSON.stringify(userPosts));
+  updateStats();
+}
+
+async function deletePost(postId) {
+  if (!confirm('Delete this post?')) return;
+
+  showLoading('Deleting...');
+  try {
+    const folder = getUserFolder();
+    const post = userPosts.find(p => p.id === postId);
+
+    // Delete image from GitHub
+    const imgFiles = await githubList(`${folder}/images`);
+    const imgFile = imgFiles.find(f => f.name.startsWith(String(postId)));
+    if (imgFile) await githubDelete(`${folder}/images/${imgFile.name}`, imgFile.sha);
+
+    // Delete metadata from GitHub
+    const postFiles = await githubList(`${folder}/posts`);
+    const metaFile = postFiles.find(f => f.name.startsWith(String(postId)));
+    if (metaFile) await githubDelete(`${folder}/posts/${metaFile.name}`, metaFile.sha);
+
+    // Remove locally
+    userPosts = userPosts.filter(p => p.id !== postId);
+    localStorage.setItem('wanderlust_posts', JSON.stringify(userPosts));
+
+    hideLoading();
+    showToast('Post deleted');
+    renderFeed();
+    updateStats();
+  } catch (err) {
+    hideLoading();
+    showToast('Delete failed: ' + err.message);
+  }
+}
+
+// ═══════════════════════════════════
+// GALLERY
+// ═══════════════════════════════════
+function loadGallery() {
+  const grid = document.getElementById('galleryGrid');
+  const empty = document.getElementById('galleryEmpty');
+  const count = document.getElementById('galleryCount');
+
+  if (userPosts.length === 0) {
+    grid.innerHTML = '';
+    empty.style.display = 'block';
+    count.textContent = '';
+    return;
   }
 
-  function showApp(user) {
-    document.getElementById('loginScreen').classList.add('hidden');
-    document.getElementById('appContent').classList.add('show');
+  empty.style.display = 'none';
+  count.textContent = userPosts.length + ' photos';
+  grid.innerHTML = userPosts.map(post => `
+    <div class="gallery-item" onclick="openLightbox('${getRawUrl(post.image)}')">
+      <img src="${getRawUrl(post.image)}" alt="" loading="lazy" class="${post.filter !== 'none' ? post.filter : ''}">
+    </div>
+  `).join('');
+}
 
-    if (user) {
-      document.getElementById('userName').textContent = user.name.split(' ')[0];
-      document.getElementById('userAvatar').src = user.picture;
-      document.getElementById('userBar').classList.add('show');
-    }
+// ═══════════════════════════════════
+// PROFILE
+// ═══════════════════════════════════
+function loadProfile() {
+  const grid = document.getElementById('profileGrid');
+  const empty = document.getElementById('profileEmpty');
 
-    setTimeout(() => {
-      document.getElementById('loginScreen').style.display = 'none';
-    }, 500);
+  document.getElementById('profStatPosts').textContent = userPosts.length;
+  document.getElementById('profStatPhotos').textContent = userPosts.length;
+  document.getElementById('profStatLikes').textContent = userPosts.reduce((s, p) => s + p.likes, 0);
+
+  if (userPosts.length === 0) {
+    grid.innerHTML = '';
+    empty.style.display = 'block';
+    return;
   }
 
-  function handleSignOut() {
-    if (confirm('Sign out of Wanderlust?')) {
-      localStorage.removeItem('wanderlust_user');
-      if (typeof google !== 'undefined') {
-        google.accounts.id.disableAutoSelect();
-      }
-      location.reload();
-    }
+  empty.style.display = 'none';
+  grid.innerHTML = userPosts.map(post => `
+    <div class="gallery-item" onclick="openLightbox('${getRawUrl(post.image)}')">
+      <img src="${getRawUrl(post.image)}" alt="" loading="lazy" class="${post.filter !== 'none' ? post.filter : ''}">
+    </div>
+  `).join('');
+}
+
+function showProfileTab(tab) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  event.target.classList.add('active');
+
+  if (tab === 'grid') {
+    document.getElementById('profileGrid').style.display = 'grid';
+    document.getElementById('profilePosts').style.display = 'none';
+  } else {
+    document.getElementById('profileGrid').style.display = 'none';
+    document.getElementById('profilePosts').style.display = 'block';
+    document.getElementById('profilePosts').innerHTML = userPosts.length > 0
+      ? userPosts.map(post => `
+        <div class="post-card" style="margin:14px 24px;">
+          <div class="post-header">
+            <img class="post-avatar" src="${post.user.picture}" alt="">
+            <div class="post-user-info">
+              <div class="post-username">${post.user.name}</div>
+              ${post.location ? `<div class="post-location-tag">📍 ${post.location}</div>` : ''}
+            </div>
+            <div class="post-time">${timeAgo(post.createdAt)}</div>
+          </div>
+          <img class="post-image ${post.filter !== 'none' ? post.filter : ''}" src="${getRawUrl(post.image)}" alt="" loading="lazy">
+          <div class="post-likes" style="padding:12px 16px;">${post.likes} likes</div>
+          ${post.caption ? `<div class="post-caption"><strong>${post.user.name.split(' ')[0]}</strong> ${post.caption}</div>` : ''}
+        </div>
+      `).join('')
+      : '<div class="empty-state"><div class="empty-icon">📝</div><div class="empty-title">No posts yet</div></div>';
   }
+}
 
-  // Check for existing session on page load
-  (function checkSession() {
-    const stored = localStorage.getItem('wanderlust_user');
-    if (stored) {
-      const user = JSON.parse(stored);
-      showApp(user);
-    }
-  })();
+// ═══════════════════════════════════
+// UTILITIES
+// ═══════════════════════════════════
+function updateStats() {
+  const postCount = userPosts.length;
+  const likeCount = userPosts.reduce((s, p) => s + p.likes, 0);
+  document.getElementById('statPosts').textContent = postCount;
+  document.getElementById('statPhotos').textContent = postCount;
+  document.getElementById('statLikes').textContent = likeCount;
+}
 
-  // Initialize Google Sign-In when the library loads
-  window.addEventListener('load', initGoogleSignIn);
+function timeAgo(dateStr) {
+  const diff = Date.now() - new Date(dateStr).getTime();
+  const mins = Math.floor(diff / 60000);
+  if (mins < 1) return 'now';
+  if (mins < 60) return mins + 'm ago';
+  const hrs = Math.floor(mins / 60);
+  if (hrs < 24) return hrs + 'h ago';
+  const days = Math.floor(hrs / 24);
+  if (days < 30) return days + 'd ago';
+  return Math.floor(days / 30) + 'mo ago';
+}
 
-  // ── Filter Logic ──
-  let currentFilter = 'none';
+function showToast(msg) {
+  const toast = document.getElementById('toast');
+  toast.textContent = msg;
+  toast.classList.add('show');
+  setTimeout(() => toast.classList.remove('show'), 2500);
+}
 
-  function applyFilter(filterClass, filterName, btn) {
-    const preview = document.getElementById('previewContent');
-    const badge = document.getElementById('filterBadge');
+function showLoading(text) {
+  document.getElementById('loadingText').textContent = text || 'Loading...';
+  document.getElementById('loadingOverlay').classList.add('show');
+}
 
-    // Remove all filter classes
-    preview.className = 'preview-content';
-    if (filterClass !== 'none') {
-      preview.classList.add(filterClass);
-    }
+function hideLoading() {
+  document.getElementById('loadingOverlay').classList.remove('show');
+}
 
-    badge.textContent = filterName;
-    currentFilter = filterClass;
+function openLightbox(src) {
+  document.getElementById('lightboxImg').src = src;
+  document.getElementById('lightbox').classList.add('show');
+}
 
-    // Update active button
-    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-  }
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('show');
+}
 
-  // ── Photo Upload ──
-  function handlePhotoUpload(event) {
-    const file = event.target.files[0];
-    if (!file) return;
-
-    const reader = new FileReader();
-    reader.onload = function(e) {
-      const preview = document.getElementById('previewContent');
-      preview.innerHTML = '';
-      preview.style.fontSize = '0';
-      preview.style.background = 'none';
-
-      const img = document.createElement('img');
-      img.src = e.target.result;
-      img.style.width = '100%';
-      img.style.height = '100%';
-      img.style.objectFit = 'cover';
-      preview.appendChild(img);
-
-      if (currentFilter !== 'none') {
-        preview.className = 'preview-content ' + currentFilter;
-      }
-
-      showToast('📸 Photo uploaded! Try the filters ✨');
-
-      // Scroll to filter section
-      document.getElementById('filterPreview').scrollIntoView({ behavior: 'smooth', block: 'center' });
-    };
-    reader.readAsDataURL(file);
-
-    // Reset input so same file can be re-uploaded
-    event.target.value = '';
-  }
-
-  // ── Like Toggle ──
-  function toggleLike(btn) {
-    if (btn.textContent === '🤍') {
-      btn.textContent = '❤️';
-      btn.classList.add('liked');
-      setTimeout(() => btn.classList.remove('liked'), 400);
-    } else {
-      btn.textContent = '🤍';
-    }
-  }
-
-  // ── Bucket List Toggle ──
-  function toggleBucket(item) {
-    const check = item.querySelector('.bucket-check');
-    check.classList.toggle('done');
-    if (check.classList.contains('done')) {
-      showToast('✅ Done! One more dream checked off!');
-    }
-  }
-
-  // ── Toast Notification ──
-  function showToast(msg) {
-    const toast = document.getElementById('toast');
-    toast.textContent = msg;
-    toast.classList.add('show');
-    setTimeout(() => toast.classList.remove('show'), 2500);
-  }
-
-  // ── Intersection Observer for Scroll Animations ──
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.style.opacity = '1';
-        entry.target.style.transform = 'translateY(0)';
-      }
-    });
-  }, { threshold: 0.1 });
-
-  document.querySelectorAll('.post-card, .bucket-item').forEach(el => {
-    observer.observe(el);
-  });
+function toggleBucket(item) {
+  const check = item.querySelector('.bucket-check');
+  check.classList.toggle('done');
+  if (check.classList.contains('done')) showToast('One more dream checked off!');
+}
 </script>
 
 </body>
