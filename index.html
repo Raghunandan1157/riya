@@ -5,7 +5,135 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Wanderlust — Travel · Food · Vibes</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script src="https://accounts.google.com/gsi/client" async defer></script>
 <style>
+  /* ── Login Screen ── */
+  .login-screen {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: linear-gradient(160deg, #FAFAF8 0%, #F5EDE4 50%, #E8D5C0 100%);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+
+  .login-screen.hidden {
+    opacity: 0;
+    transform: scale(1.05);
+    pointer-events: none;
+  }
+
+  .login-container {
+    text-align: center;
+    padding: 40px 32px;
+    max-width: 380px;
+    width: 100%;
+  }
+
+  .login-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 42px;
+    font-weight: 600;
+    letter-spacing: -1px;
+    margin-bottom: 8px;
+  }
+
+  .login-logo span { color: #C4956A; }
+
+  .login-tagline {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    color: #6B6B6B;
+    margin-bottom: 48px;
+    letter-spacing: 0.3px;
+  }
+
+  .login-illustration {
+    font-size: 64px;
+    margin-bottom: 32px;
+    line-height: 1;
+  }
+
+  .login-subtitle {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #1A1A1A;
+  }
+
+  .login-desc {
+    font-size: 14px;
+    color: #6B6B6B;
+    margin-bottom: 36px;
+    line-height: 1.6;
+  }
+
+  .google-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 32px;
+    background: #FFFFFF;
+    border: 1.5px solid #EBEBEB;
+    border-radius: 50px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    color: #1A1A1A;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  }
+
+  .google-btn:hover {
+    box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+    transform: translateY(-2px);
+    border-color: #C4956A;
+  }
+
+  .google-btn svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .login-footer {
+    margin-top: 32px;
+    font-size: 11px;
+    color: #9B9B9B;
+    line-height: 1.6;
+  }
+
+  .user-bar {
+    display: none;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+  }
+
+  .user-bar.show { display: flex; }
+
+  .user-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 2px solid #C4956A;
+  }
+
+  .user-name {
+    font-size: 13px;
+    font-weight: 600;
+    color: #1A1A1A;
+  }
+
+  .app-content { display: none; }
+  .app-content.show { display: block; }
+
+  .app-content .bottom-nav { display: none; }
+  .app-content.show .bottom-nav { display: flex; }
   :root {
     --bg: #FAFAF8;
     --card: #FFFFFF;
@@ -746,12 +874,35 @@
 </head>
 <body>
 
+<!-- Login Screen -->
+<div class="login-screen" id="loginScreen">
+  <div class="login-container">
+    <div class="login-logo">Wander<span>lust</span></div>
+    <div class="login-tagline">Travel · Food · Vibes</div>
+    <div class="login-illustration">✈️🌍🍜</div>
+    <div class="login-subtitle">Welcome, Explorer</div>
+    <div class="login-desc">Sign in to save your trips, share foodie finds, and connect with fellow wanderers.</div>
+    <button class="google-btn" id="googleSignInBtn" onclick="handleGoogleSignIn()">
+      <svg viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.27-4.74 3.27-8.1z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+      Continue with Google
+    </button>
+    <div class="login-footer">By signing in, you agree to our Terms of Service</div>
+  </div>
+</div>
+
 <div class="toast" id="toast"></div>
+
+<!-- App Content (hidden until login) -->
+<div class="app-content" id="appContent">
 
 <!-- Header -->
 <header class="header">
   <div class="logo">Wander<span>lust</span></div>
   <div class="header-icons">
+    <div class="user-bar" id="userBar" onclick="handleSignOut()">
+      <img class="user-avatar" id="userAvatar" src="" alt="">
+      <span class="user-name" id="userName"></span>
+    </div>
     <button onclick="showToast('🔔 No new notifications')">🔔<span class="notif-dot"></span></button>
     <button onclick="showToast('⚙️ Settings coming soon!')">⚙️</button>
   </div>
@@ -996,7 +1147,82 @@
   </button>
 </nav>
 
+</div><!-- end app-content -->
+
 <script>
+  // ── Google Sign-In ──
+  const GOOGLE_CLIENT_ID = '828442976315-29947njoflscn4u45rn6en4upa48aa52.apps.googleusercontent.com';
+
+  function handleCredentialResponse(response) {
+    const payload = JSON.parse(atob(response.credential.split('.')[1]));
+    loginUser(payload.name, payload.picture, payload.email);
+  }
+
+  function initGoogleSignIn() {
+    if (typeof google === 'undefined') return;
+    google.accounts.id.initialize({
+      client_id: GOOGLE_CLIENT_ID,
+      callback: handleCredentialResponse,
+      auto_select: true,
+    });
+  }
+
+  function handleGoogleSignIn() {
+    if (typeof google === 'undefined') {
+      showToast('Google Sign-In loading, try again...');
+      return;
+    }
+    google.accounts.id.prompt((notification) => {
+      if (notification.isNotDisplayed() || notification.isSkippedMoment()) {
+        // Fallback: use popup mode
+        google.accounts.id.prompt();
+      }
+    });
+  }
+
+  function loginUser(name, picture, email) {
+    const user = { name, picture, email };
+    localStorage.setItem('wanderlust_user', JSON.stringify(user));
+    showApp(user);
+  }
+
+  function showApp(user) {
+    document.getElementById('loginScreen').classList.add('hidden');
+    document.getElementById('appContent').classList.add('show');
+
+    if (user) {
+      document.getElementById('userName').textContent = user.name.split(' ')[0];
+      document.getElementById('userAvatar').src = user.picture;
+      document.getElementById('userBar').classList.add('show');
+    }
+
+    setTimeout(() => {
+      document.getElementById('loginScreen').style.display = 'none';
+    }, 500);
+  }
+
+  function handleSignOut() {
+    if (confirm('Sign out of Wanderlust?')) {
+      localStorage.removeItem('wanderlust_user');
+      if (typeof google !== 'undefined') {
+        google.accounts.id.disableAutoSelect();
+      }
+      location.reload();
+    }
+  }
+
+  // Check for existing session on page load
+  (function checkSession() {
+    const stored = localStorage.getItem('wanderlust_user');
+    if (stored) {
+      const user = JSON.parse(stored);
+      showApp(user);
+    }
+  })();
+
+  // Initialize Google Sign-In when the library loads
+  window.addEventListener('load', initGoogleSignIn);
+
   // ── Filter Logic ──
   let currentFilter = 'none';
 
