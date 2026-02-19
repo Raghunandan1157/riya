@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>Wanderlust — Travel · Food · Vibes</title>
+<title>Riya Does Life — Travel · Food · Vibes</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <script src="https://accounts.google.com/gsi/client" async defer></script>
 <style>
@@ -959,11 +959,11 @@
 <!-- Login Screen -->
 <div class="login-screen" id="loginScreen">
   <div class="login-container">
-    <div class="login-logo-big">Wander<span>lust</span></div>
+    <div class="login-logo-big">Riya Does <span>Life</span></div>
     <div class="login-tagline">Travel · Food · Vibes</div>
     <div class="login-illustration">✈️🌍🍜</div>
     <div class="login-subtitle">Welcome, Explorer</div>
-    <div class="login-desc">Sign in to save your trips, share foodie finds, and connect with fellow wanderers.</div>
+    <div class="login-desc">Sign in to save your trips, share foodie finds, and follow along with Riya's adventures.</div>
     <button class="google-btn" onclick="handleGoogleSignIn()">
       <svg viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.27-4.74 3.27-8.1z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
       Continue with Google
@@ -994,7 +994,7 @@
 
 <!-- Header -->
 <header class="header">
-  <div class="logo">Wander<span>lust</span></div>
+  <div class="logo">Riya Does <span>Life</span></div>
   <div class="header-right">
     <button class="header-btn" onclick="showToast('No new notifications')">🔔<span class="notif-dot"></span></button>
     <div class="user-pill" id="userPill" onclick="switchView('profile')">
@@ -1249,7 +1249,7 @@ function handleGoogleSignIn() {
 
 function loginUser(user) {
   currentUser = user;
-  localStorage.setItem('wanderlust_user', JSON.stringify(user));
+  localStorage.setItem('riyadoeslife_user', JSON.stringify(user));
   showApp();
 }
 
@@ -1274,9 +1274,9 @@ function showApp() {
 }
 
 function handleSignOut() {
-  if (confirm('Sign out of Wanderlust?')) {
-    localStorage.removeItem('wanderlust_user');
-    localStorage.removeItem('wanderlust_posts');
+  if (confirm('Sign out of Riya Does Life?')) {
+    localStorage.removeItem('riyadoeslife_user');
+    localStorage.removeItem('riyadoeslife_posts');
     if (typeof google !== 'undefined') google.accounts.id.disableAutoSelect();
     location.reload();
   }
@@ -1284,7 +1284,7 @@ function handleSignOut() {
 
 // Check existing session
 (function() {
-  const stored = localStorage.getItem('wanderlust_user');
+  const stored = localStorage.getItem('riyadoeslife_user');
   if (stored) {
     currentUser = JSON.parse(stored);
     showApp();
@@ -1460,7 +1460,7 @@ async function createPost() {
 
     // Save locally
     userPosts.unshift(post);
-    localStorage.setItem('wanderlust_posts', JSON.stringify(userPosts));
+    localStorage.setItem('riyadoeslife_posts', JSON.stringify(userPosts));
 
     // Reset form
     selectedImageData = null;
@@ -1490,7 +1490,7 @@ async function createPost() {
 // ═══════════════════════════════════
 async function loadPosts() {
   // Load from localStorage first (instant)
-  const cached = localStorage.getItem('wanderlust_posts');
+  const cached = localStorage.getItem('riyadoeslife_posts');
   if (cached) {
     userPosts = JSON.parse(cached);
     renderFeed();
@@ -1526,7 +1526,7 @@ async function loadPosts() {
     });
 
     userPosts = posts;
-    localStorage.setItem('wanderlust_posts', JSON.stringify(userPosts));
+    localStorage.setItem('riyadoeslife_posts', JSON.stringify(userPosts));
     renderFeed();
     updateStats();
   } catch (err) {
@@ -1581,7 +1581,7 @@ function toggleLike(postId, btn) {
   btn.style.animation = post.liked ? 'heartPop 0.4s ease' : 'none';
   btn.closest('.post-card').querySelector('.post-likes').textContent = post.likes + ' likes';
 
-  localStorage.setItem('wanderlust_posts', JSON.stringify(userPosts));
+  localStorage.setItem('riyadoeslife_posts', JSON.stringify(userPosts));
   updateStats();
 }
 
@@ -1605,7 +1605,7 @@ async function deletePost(postId) {
 
     // Remove locally
     userPosts = userPosts.filter(p => p.id !== postId);
-    localStorage.setItem('wanderlust_posts', JSON.stringify(userPosts));
+    localStorage.setItem('riyadoeslife_posts', JSON.stringify(userPosts));
 
     hideLoading();
     showToast('Post deleted');
